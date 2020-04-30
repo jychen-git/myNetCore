@@ -6,3 +6,4 @@ F:\0_Study\1_Core\KAJ.Common\obj\Debug\netcoreapp3.1\KAJ.Common.AssemblyInfoInpu
 F:\0_Study\1_Core\KAJ.Common\obj\Debug\netcoreapp3.1\KAJ.Common.AssemblyInfo.cs
 F:\0_Study\1_Core\KAJ.Common\obj\Debug\netcoreapp3.1\KAJ.Common.dll
 F:\0_Study\1_Core\KAJ.Common\obj\Debug\netcoreapp3.1\KAJ.Common.pdb
+F:\0_Study\1_Core\KAJ.Common\obj\Debug\netcoreapp3.1\KAJ.Common.csprojAssemblyReference.cache
