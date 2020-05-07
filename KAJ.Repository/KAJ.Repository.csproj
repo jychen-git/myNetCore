@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
+    <ProjectReference Include="..\KAJ.Common\KAJ.Common.csproj" />
+    <ProjectReference Include="..\KAJ.IRepository\KAJ.IRepository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "KAJ.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/KAJ.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/KAJ.Model.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "KAJ.Model/1.0.0": {
+      "type": "project",
+      "path": "../KAJ.Model/KAJ.Model.csproj",
+      "msbuildProject": "../KAJ.Model/KAJ.Model.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "KAJ.Model >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\lenovo\\.nuget\\packages\\": {}
@@ -32,7 +51,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "F:\\0_Study\\1_Core\\KAJ.Model\\KAJ.Model.csproj": {
+              "projectPath": "F:\\0_Study\\1_Core\\KAJ.Model\\KAJ.Model.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

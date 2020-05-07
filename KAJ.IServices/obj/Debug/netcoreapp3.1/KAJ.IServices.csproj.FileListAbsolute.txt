@@ -7,3 +7,6 @@ F:\0_Study\1_Core\KAJ.IServices\obj\Debug\netcoreapp3.1\KAJ.IServices.AssemblyIn
 F:\0_Study\1_Core\KAJ.IServices\obj\Debug\netcoreapp3.1\KAJ.IServices.dll
 F:\0_Study\1_Core\KAJ.IServices\obj\Debug\netcoreapp3.1\KAJ.IServices.pdb
 F:\0_Study\1_Core\KAJ.IServices\obj\Debug\netcoreapp3.1\KAJ.IServices.csprojAssemblyReference.cache
+F:\0_Study\1_Core\KAJ.IServices\bin\Debug\netcoreapp3.1\KAJ.Model.dll
+F:\0_Study\1_Core\KAJ.IServices\bin\Debug\netcoreapp3.1\KAJ.Model.pdb
+F:\0_Study\1_Core\KAJ.IServices\obj\Debug\netcoreapp3.1\KAJ.IServices.csproj.CopyComplete
