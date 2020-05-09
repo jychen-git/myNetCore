@@ -189,7 +189,7 @@ namespace KAJ.Repository.Base
              .ToPageListAsync(intPageIndex, intPageSize, totalCount);
 
             int pageCount = (Math.Ceiling(totalCount.ObjToDecimal(0) / intPageSize.ObjToDecimal(0))).ObjToInt();
-            return new PageModel<TEntity>() { dataCount = totalCount, pageCount = pageCount, page = intPageIndex, PageSize = intPageSize, data = list };
+            return new PageModel<TEntity>() { DataCount = totalCount, PageCount = pageCount, Page = intPageIndex, PageSize = intPageSize, Data = list };
         }
 
         public async Task<bool> Update(TEntity model)

@@ -114,3 +114,12 @@ F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.csproj.CoreCompileIn
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cache
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\layuiadmin.cshtml.g.cs
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutDemo.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll

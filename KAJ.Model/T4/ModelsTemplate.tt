@@ -11,12 +11,12 @@
 <#@ import namespace="System.Data.SqlClient" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
-<#@ include file="$(ProjectDir)DbHelper.ttinclude"  #>
-<#@ include file="$(ProjectDir)ModelAuto.ttinclude"	#>
+<#@ include file="$(ProjectDir)\T4\DbHelper.ttinclude"  #>
+<#@ include file="$(ProjectDir)\T4\ModelAuto.ttinclude"	#>
 <# var manager = new Manager(Host, GenerationEnvironment, true); #>
 <# 
 	var OutputPath1 =Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Host.TemplateFile+"..")+"..")+"..");
-	OutputPath1=Path.Combine(OutputPath1,"Blog.Core.Model","Models_New");
+	OutputPath1=Path.Combine(OutputPath1,"KAJ.Model","Models");
 	if (!Directory.Exists(OutputPath1))
 	{
 	    Directory.CreateDirectory(OutputPath1);

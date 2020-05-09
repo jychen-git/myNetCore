@@ -12,4 +12,27 @@
     <ProjectReference Include="..\KAJ.Model\KAJ.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="T4\IRepositoryTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRepositoryTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IRepositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="T4\IRepositoryTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IRepositoryTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
