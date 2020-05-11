@@ -4,4 +4,33 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KAJ.Common\KAJ.Common.csproj" />
+    <ProjectReference Include="..\KAJ.IRepository\KAJ.IRepository.csproj" />
+    <ProjectReference Include="..\KAJ.IServices\KAJ.IServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="T4\ServicesTemplate.tt">
+      <LastGenOutput>ServicesTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="T4\ServicesTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServicesTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

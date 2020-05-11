@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Blog.Core.Model.Models
+namespace KAJ.Model.Models
 {
 	 ///<summary>
 	 ///A_Org

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Blog.Core.Model.Models
+namespace KAJ.Model.Models
 {
 	 ///<summary>
 	 ///A_Dept
@@ -11,25 +11,25 @@ namespace Blog.Core.Model.Models
 	 {
 	 
 		 /// <summary>
-        /// ID
+        /// 主键ID
         /// </summary>
 		[Key]
 		[Required]
 		public string ID { get; set; }
 	
 		 /// <summary>
-        /// ParentID
+        /// 父级ID
         /// </summary>
 		public string ParentID { get; set; }
 	
 		 /// <summary>
-        /// Code
+        /// 部门编号
         /// </summary>
 		[Required]
 		public string Code { get; set; }
 	
 		 /// <summary>
-        /// Name
+        /// 部门名称
         /// </summary>
 		public string Name { get; set; }
 	 

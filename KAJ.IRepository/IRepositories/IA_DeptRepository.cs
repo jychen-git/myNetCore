@@ -1,9 +1,9 @@
 	//----------A_Dept开始----------
     
 	
-using Blog.Core.IRepository.Base;
-using Blog.Core.Model.Models;
-namespace Blog.Core.IRepository
+using KAJ.IRepository.Base;
+using KAJ.Model.Models;
+namespace KAJ.IRepository
 {	
 	/// <summary>
 	/// IA_DeptRepository

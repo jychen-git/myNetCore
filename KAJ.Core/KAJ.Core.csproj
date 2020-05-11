@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KAJ.Common\KAJ.Common.csproj" />
+    <ProjectReference Include="..\KAJ.IRepository\KAJ.IRepository.csproj" />
+    <ProjectReference Include="..\KAJ.IServices\KAJ.IServices.csproj" />
+    <ProjectReference Include="..\KAJ.Model\KAJ.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,8 +8,26 @@ namespace KAJ.IRepository.Base
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
+        /// <summary>
+        /// 根据主键查找实体
+        /// </summary>
+        /// <param name="objId">实体主键</param>
+        /// <returns>目标实体</returns>
         Task<TEntity> QueryById(object objId);
+
+        /// <summary>
+        /// 根据主键查找实体
+        /// </summary>
+        /// <param name="objId">实体主键</param>
+        /// <param name="blnUseCache">使用缓存</param>
+        /// <returns>目标实体</returns>
         Task<TEntity> QueryById(object objId, bool blnUseCache = false);
+
+        /// <summary>
+        /// 根据主键数组查找实体集合
+        /// </summary>
+        /// <param name="lstIds">实体主键数组</param>
+        /// <returns>数据实体列表</returns>
         Task<List<TEntity>> QueryByIDs(object[] lstIds);
 
         /// <summary>

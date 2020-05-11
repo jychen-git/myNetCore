@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Blog.Core.Model.Models
+namespace KAJ.Model.Models
 {
 	 ///<summary>
 	 ///A_User
@@ -11,29 +11,29 @@ namespace Blog.Core.Model.Models
 	 {
 	 
 		 /// <summary>
-        /// ID
+        /// 主键ID
         /// </summary>
 		[Key]
 		[Required]
 		public string ID { get; set; }
 	
 		 /// <summary>
-        /// Code
+        /// 用户账号
         /// </summary>
 		public string Code { get; set; }
 	
 		 /// <summary>
-        /// Name
+        /// 用户名称
         /// </summary>
 		public string Name { get; set; }
 	
 		 /// <summary>
-        /// PassWord
+        /// 用户密码，MD5加密
         /// </summary>
 		public string PassWord { get; set; }
 	
 		 /// <summary>
-        /// CreateTime
+        /// 创建时间
         /// </summary>
 		public DateTime? CreateTime { get; set; }
 	 
