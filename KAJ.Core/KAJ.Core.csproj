@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="MiniProfiler.AspNetCore" Version="4.1.0" />
   </ItemGroup>
@@ -15,8 +17,6 @@
     <ProjectReference Include="..\KAJ.IRepository\KAJ.IRepository.csproj" />
     <ProjectReference Include="..\KAJ.IServices\KAJ.IServices.csproj" />
     <ProjectReference Include="..\KAJ.Model\KAJ.Model.csproj" />
-    <ProjectReference Include="..\KAJ.Repository\KAJ.Repository.csproj" />
-    <ProjectReference Include="..\KAJ.Services\KAJ.Services.csproj" />
   </ItemGroup>
 
 </Project>

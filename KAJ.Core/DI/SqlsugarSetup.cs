@@ -5,7 +5,6 @@ using SqlSugar;
 using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KAJ.Core.DI
@@ -19,7 +18,7 @@ namespace KAJ.Core.DI
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             // 默认添加主数据库连接
-            MainDB.CurrentDbConnId = "KAJ_Base";// Appsettings.app(new string[] { "MainDB" });
+            MainDB.CurrentDbConnId = Appsettings.app(new string[] { "MainDB" });
 
             // 把多个连接对象注入服务，这里必须采用Scope，因为有事务操作
             services.AddScoped<ISqlSugarClient>(o =>
@@ -55,7 +54,7 @@ namespace KAJ.Core.DI
                                     Parallel.For(0, 1, e =>
                                     {
                                         MiniProfiler.Current.CustomTiming("SQL：", GetParas(p) + "【SQL语句】：" + sql);
-                                       // LogLock.OutSql2Log("SqlLog", new string[] { GetParas(p), "【SQL语句】：" + sql });
+                                        // LogLock.OutSql2Log("SqlLog", new string[] { GetParas(p), "【SQL语句】：" + sql });
                                     });
                                 }
                             }

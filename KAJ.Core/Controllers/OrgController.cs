@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using KAJ.IServices;
+﻿using KAJ.IServices;
+using KAJ.Model;
 using KAJ.Model.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace KAJ.Core.Controllers
 {
@@ -12,6 +11,10 @@ namespace KAJ.Core.Controllers
     {
         private readonly IA_OrgServices _orgServices;
 
+        /// <summary>
+        /// 构造函数注入
+        /// </summary>
+        /// <param name="orgServices"></param>
         public OrgController(IA_OrgServices orgServices)
         {
             _orgServices = orgServices;
@@ -22,13 +25,31 @@ namespace KAJ.Core.Controllers
             return View();
         }
 
+        public IActionResult addOrg()
+        {
+            return View();
+        }
+
+        //public async Task<JsonResult> InsertOrgAsync()
+        //{
+        //    A_Org a_Org = new A_Org();
+        //    a_Org.ID = Guid.NewGuid().ToString();
+        //    a_Org.Code = "AAA";
+        //    a_Org.Name = "信息部";
+        //    await _orgServices.Add(a_Org);
+        //    return Json("");
+        //}
+        [HttpPost]
         public async Task<JsonResult> InsertOrgAsync()
         {
+            var data = new MessageModel<string>();
+
             A_Org a_Org = new A_Org();
-            a_Org.ID = "55e39ebb-6f87-467e-9019-c61fa00a25e7";
+            a_Org.ID = Guid.NewGuid().ToString();
             a_Org.Code = "AAA";
             a_Org.Name = "信息部";
             await _orgServices.Add(a_Org);
+
             return Json("");
         }
     }
