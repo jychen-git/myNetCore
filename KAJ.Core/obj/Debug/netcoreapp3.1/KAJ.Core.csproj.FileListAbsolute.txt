@@ -110,8 +110,6 @@ F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Wor
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.csproj.CoreCompileInputs.cache
-F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cache
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\layuiadmin.cshtml.g.cs
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutDemo.cshtml.g.cs
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
@@ -160,3 +158,13 @@ F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Model.dll
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.IRepository.pdb
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.IServices.pdb
 F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Model.pdb
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\MiniProfiler.Shared.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\MiniProfiler.AspNetCore.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Autofac.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Autofac.Extensions.DependencyInjection.dll
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.csproj.CoreCompileInputs.cache
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cache
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Repository.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Services.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Repository.pdb
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Services.pdb

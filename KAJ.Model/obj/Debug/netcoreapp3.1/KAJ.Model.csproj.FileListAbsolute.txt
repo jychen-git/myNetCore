@@ -6,4 +6,3 @@ F:\0_Study\1_Core\KAJ.Model\obj\Debug\netcoreapp3.1\KAJ.Model.AssemblyInfoInputs
 F:\0_Study\1_Core\KAJ.Model\obj\Debug\netcoreapp3.1\KAJ.Model.AssemblyInfo.cs
 F:\0_Study\1_Core\KAJ.Model\obj\Debug\netcoreapp3.1\KAJ.Model.dll
 F:\0_Study\1_Core\KAJ.Model\obj\Debug\netcoreapp3.1\KAJ.Model.pdb
-F:\0_Study\1_Core\KAJ.Model\obj\Debug\netcoreapp3.1\KAJ.Model.csprojAssemblyReference.cache

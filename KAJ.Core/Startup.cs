@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KAJ.Core.DI;
+using KAJ.IServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,9 @@ namespace KAJ.Core
         {
             services.AddControllersWithViews();
             services.AddMvc();
+
+            //自定义加入
+            services.AddSqlsugarSetup();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +42,7 @@ namespace KAJ.Core
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();

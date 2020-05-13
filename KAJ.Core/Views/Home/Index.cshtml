@@ -56,7 +56,7 @@
                     <li class="layui-nav-item">
                         <a href="javascript:;">解决方案</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;">列表一</a></dd>
+                            <dd><a href="javascript:void(0);" onClick="iframeChange();">组织管理</a></dd>
                             <dd><a href="javascript:;">列表二</a></dd>
                             <dd><a href="">超链接</a></dd>
                         </dl>
@@ -69,7 +69,7 @@
 
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <iframe src="https://www.layui.com/" frameborder="0" style="border: 0px;width: 100%;height:100%" scrolling="auto" class="layadmin-iframe"></iframe>
+            <iframe id="iframe" src="https://www.layui.com/" frameborder="1" style="border: 20px;width: 100%;height:100%" scrolling="auto" class="layadmin-iframe"></iframe>
             @*<iframe src="/Home/LayuiNav" frameborder="0" style="border: 0px;width: 100%;height:100%" scrolling="auto" class="layadmin-iframe"></iframe>*@
               
             
@@ -80,5 +80,11 @@
             © layui.com -底部固定区域
         </div>
     </div>
+    <script charset="utf-8">
+        function iframeChange() {
+            $('iframe').attr('src', "/Org/Index");
+        }
+    </script>
+
 </body>
 </html>

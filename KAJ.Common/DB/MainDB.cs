@@ -6,6 +6,6 @@ namespace KAJ.Common.DB
 {
    public class MainDB
     {
-        public static string CurrentDbConnId = "1";
+        public static string CurrentDbConnId = "KAJ_Base";
     }
 }

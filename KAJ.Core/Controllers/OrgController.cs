@@ -10,19 +10,25 @@ namespace KAJ.Core.Controllers
 {
     public class OrgController : Controller
     {
-        readonly IA_OrgServices _orgServices;
+        private readonly IA_OrgServices _orgServices;
+
+        public OrgController(IA_OrgServices orgServices)
+        {
+            _orgServices = orgServices;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public JsonResult InsertOrg()
+        public async Task<JsonResult> InsertOrgAsync()
         {
             A_Org a_Org = new A_Org();
-            a_Org.ID = "asdfsg";
+            a_Org.ID = "55e39ebb-6f87-467e-9019-c61fa00a25e7";
             a_Org.Code = "AAA";
             a_Org.Name = "信息部";
-            _orgServices.Add(a_Org);
+            await _orgServices.Add(a_Org);
             return Json("");
         }
     }
