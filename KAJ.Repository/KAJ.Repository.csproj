@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>F:\0_Study\1_Core\KAJ.Core\bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\KAJ.Common\KAJ.Common.csproj" />
     <ProjectReference Include="..\KAJ.IRepository\KAJ.IRepository.csproj" />

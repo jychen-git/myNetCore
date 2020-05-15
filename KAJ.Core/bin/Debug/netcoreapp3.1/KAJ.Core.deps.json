@@ -2250,7 +2250,8 @@
       },
       "KAJ.IServices/1.0.0": {
         "dependencies": {
-          "KAJ.Model": "1.0.0"
+          "KAJ.Model": "1.0.0",
+          "sqlSugarCore": "5.0.0.14"
         },
         "runtime": {
           "KAJ.IServices.dll": {}

@@ -5,6 +5,7 @@ using KAJ.Model;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -44,6 +45,11 @@ namespace KAJ.Repository.Base
         internal ISqlSugarClient Db
         {
             get { return _dbClient; }
+        }
+
+        internal IUnitOfWork UnitOfWork
+        {
+            get { return _unitOfWork; }
         }
 
         public BaseRepository(IUnitOfWork unitOfWork)
@@ -130,7 +136,7 @@ namespace KAJ.Repository.Base
             return await _dbClient.Queryable<TEntity>().OrderByIF(orderByExpression != null, orderByExpression, isAsc ? OrderByType.Asc : OrderByType.Desc).WhereIF(whereExpression != null, whereExpression).ToListAsync();
         }
 
-        public async  Task<List<TEntity>> Query(string strWhere, string strOrderByFileds)
+        public async Task<List<TEntity>> Query(string strWhere, string strOrderByFileds)
         {
             return await _dbClient.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToListAsync();
         }
@@ -229,6 +235,14 @@ namespace KAJ.Repository.Base
             }
             return await up.ExecuteCommandHasChangeAsync();
         }
+        public IUnitOfWork GetUnitOfWork()
+        {
+            return _unitOfWork;
+        }
 
+        public DataTable GetListData()
+        {
+            return null;
+        }
     }
 }

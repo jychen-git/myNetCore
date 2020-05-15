@@ -1,8 +1,10 @@
-﻿using KAJ.IServices;
+﻿using KAJ.IRepository.Base;
+using KAJ.IServices;
 using KAJ.Model;
 using KAJ.Model.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace KAJ.Core.Controllers
@@ -22,6 +24,7 @@ namespace KAJ.Core.Controllers
 
         public IActionResult Index()
         {
+            DataTable data = _orgServices.GetListData();
             return View();
         }
 

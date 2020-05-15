@@ -1,8 +1,10 @@
 ﻿using KAJ.IRepository.Base;
 using KAJ.IServices.Base;
 using KAJ.Model;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +40,16 @@ namespace KAJ.Services.Base
             return await BaseDal.DeleteByIds(ids);
         }
 
+        virtual public DataTable GetListData()
+        {
+            return null;
+        }
+
+        public IUnitOfWork GetUnitOfWork()
+        {
+            return BaseDal.GetUnitOfWork();
+        }
+
         public async Task<List<TEntity>> Query()
         {
             return await BaseDal.Query();
@@ -60,7 +72,7 @@ namespace KAJ.Services.Base
 
         public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, bool isAsc = true)
         {
-            return await BaseDal.Query(whereExpression, orderByExpression,isAsc);
+            return await BaseDal.Query(whereExpression, orderByExpression, isAsc);
         }
 
         public async Task<List<TEntity>> Query(string strWhere, string strOrderByFileds)
@@ -83,7 +95,7 @@ namespace KAJ.Services.Base
             return await BaseDal.Query(whereExpression, intPageIndex, intPageSize, strOrderByFileds);
         }
 
-       public async Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFileds)
+        public async Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFileds)
         {
             return await BaseDal.Query(strWhere, intPageIndex, intPageSize, strOrderByFileds);
         }
@@ -120,7 +132,7 @@ namespace KAJ.Services.Base
 
         public async Task<bool> Update(TEntity entity, string strWhere)
         {
-            return await BaseDal.Update(entity,strWhere);
+            return await BaseDal.Update(entity, strWhere);
         }
 
         public async Task<bool> Update(object operateAnonymousObjects)

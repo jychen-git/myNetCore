@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KAJ.Model\KAJ.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="T4\IServicesTemplate.tt">
       <LastGenOutput>IServicesTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -29,6 +25,14 @@
 
   <ItemGroup>
     <Folder Include="IServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KAJ.Model\KAJ.Model.csproj" />
   </ItemGroup>
 
 </Project>

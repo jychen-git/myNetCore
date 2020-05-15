@@ -1,13 +1,27 @@
-﻿using System;
+﻿using KAJ.Model;
+using SqlSugar;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using KAJ.Model;
 
 namespace KAJ.IRepository.Base
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
+        /// <summary>
+        /// 返回工作单元，手动创建事物或者自定义SQL
+        /// </summary>
+        /// <returns></returns>
+        IUnitOfWork GetUnitOfWork();
+
+        /// <summary>
+        /// 返回任意SQL的数据
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetListData();
+
         /// <summary>
         /// 根据主键查找实体
         /// </summary>

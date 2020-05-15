@@ -167,3 +167,5 @@ F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Castle.Core.dll
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.csproj.CoreCompileInputs.cache
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cache
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Org\addOrg.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\Form\PageView.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\Form\Index.cshtml.g.cs

@@ -32,6 +32,7 @@ namespace KAJ.Core
             //自定义加入
             services.AddSingleton(new Appsettings(Configuration));//注入到配置操作类中
             services.AddSqlsugarSetup();
+            // services.AddSingleton<Ixxxx,XXXX>();//接口类new实现类
 
             services.AddControllersWithViews();
             services.AddMvc();
@@ -95,9 +96,14 @@ namespace KAJ.Core
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "UI",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }

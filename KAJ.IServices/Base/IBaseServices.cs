@@ -1,14 +1,19 @@
 ﻿using KAJ.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KAJ.IServices.Base
 {
     public interface IBaseServices<TEntity> where TEntity : class
     {
+        /// <summary>
+        /// 返回任意SQL的数据
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetListData();
 
         Task<TEntity> QueryById(object objId);
         Task<TEntity> QueryById(object objId, bool blnUseCache = false);

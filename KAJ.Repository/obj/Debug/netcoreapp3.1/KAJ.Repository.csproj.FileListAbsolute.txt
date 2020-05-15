@@ -14,3 +14,6 @@ F:\0_Study\1_Core\KAJ.Repository\bin\Debug\netcoreapp3.1\KAJ.Model.pdb
 F:\0_Study\1_Core\KAJ.Repository\obj\Debug\netcoreapp3.1\KAJ.Repository.csproj.CopyComplete
 F:\0_Study\1_Core\KAJ.Repository\bin\Debug\netcoreapp3.1\KAJ.Common.dll
 F:\0_Study\1_Core\KAJ.Repository\bin\Debug\netcoreapp3.1\KAJ.Common.pdb
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Repository.deps.json
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Repository.dll
+F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\KAJ.Repository.pdb
