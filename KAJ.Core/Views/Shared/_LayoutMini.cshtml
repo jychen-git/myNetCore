@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KAJ.Core</title>
+    <script type="text/javascript">
+        //TODO by cjy
+        //GetBasicInfo参数分别为：当前用户信息、按钮字段权限、动态文件服务器地址和当前流程环节
+        //请根据具体需要调整true或false
+        @*@Html.GetBasicInfo(true, true, false, true);*@
+    </script>
+    <script src="@Url.Content("~/JsLibrary/Base/JQuery/jquery-3.4.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/JsLibrary/Base/MiniUI/miniui/miniui.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/JsLibrary/Base/MiniUI/baseMiniuiExt.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/JsLibrary/Base/MiniUI/customCtrl.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/JsLibrary/Base/MiniUI/miniuiExt.js")" type="text/javascript"></script>
+</head>
+<body style="background-color:#LightYellow">
+    <div id="loadShawde" style="height: 100%; width: 100%; position: absolute; background-color: #LightYellow; z-index: 9999; ">
+        <img style="margin-top: 25%; margin-left: 50%;" alt="" />
+    </div>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        preInit();
+        $("#loadShawde").hide();
+
+    </script>
+</body>
+</html>
