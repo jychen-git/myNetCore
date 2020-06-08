@@ -31,6 +31,11 @@ namespace KAJ.Model.Models
         /// Name
         /// </summary>
 		public string Name { get; set; }
+	
+		 /// <summary>
+        /// Remark
+        /// </summary>
+		public string Remark { get; set; }
 	 
 	 }
 }	 

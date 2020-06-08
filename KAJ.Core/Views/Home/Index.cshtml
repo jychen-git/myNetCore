@@ -49,7 +49,8 @@
                         <a href="javascript:;">开发模式</a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;">表单设计</a></dd>
-                            <dd><a href="javascript:;">列表设计</a></dd>
+                            <dd><a href="javascript:void(0);" onClick="iframeChangeAutoList();">列表设计</a></dd>
+                            <dd><a href="javascript:void(0);" onClick="iframeChangeDemoList();">列表Demo</a></dd>
                             <dd><a href="javascript:;">流程设计</a></dd>
                         </dl>
                     </li>
@@ -88,8 +89,15 @@
             $('iframe').attr('src', "/Org/addOrg");
         }
         function iframeChangeList() {
-            $('iframe').attr('src', "/UI/Form/PageView");
+            $('iframe').attr('src', "/UI/Form/CoreView");
         }
+        function iframeChangeAutoList() {
+            $('iframe').attr('src', "/UI/List/CoreView");
+        }
+        function iframeChangeDemoList() {
+            $('iframe').attr('src', "/UI/List/Index");
+        }
+        
     </script>
 
 </body>

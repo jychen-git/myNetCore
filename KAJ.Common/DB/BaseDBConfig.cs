@@ -59,10 +59,28 @@ namespace KAJ.Common.DB
             //}
         }
 
+
+        public static string GetConnectionString(string DBstring)
+        {
+            string _connectionString = "";
+            List<MutiDBOperate> listdatabase = Appsettings.app<MutiDBOperate>("DBS")
+               .Where(i => i.Enabled).ToList();
+            foreach (MutiDBOperate item in listdatabase)
+            {
+                if (item.ConnId == DBstring)
+                {
+                    _connectionString = item.Connection;
+                }
+            }
+            return _connectionString;
+        }
+
         private static MutiDBOperate SpecialDbString(MutiDBOperate mutiDBOperate)
         {
             return mutiDBOperate;
         }
+
+
     }
 
 

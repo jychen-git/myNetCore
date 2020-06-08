@@ -5,9 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="JsLibrary\**" />
+    <Compile Remove="wwwroot\lib\minuinet\res\**" />
+    <Content Remove="JsLibrary\**" />
+    <Content Remove="wwwroot\lib\minuinet\res\**" />
+    <EmbeddedResource Remove="JsLibrary\**" />
+    <EmbeddedResource Remove="wwwroot\lib\minuinet\res\**" />
+    <None Remove="JsLibrary\**" />
+    <None Remove="wwwroot\lib\minuinet\res\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\lib\minuinet\baseMiniuiExt.js" />
     <Content Remove="wwwroot\lib\minuinet\boot.js" />
     <Content Remove="wwwroot\lib\minuinet\customCtrl.js" />
+    <Content Remove="wwwroot\lib\minuinet\flowBusLeft.js" />
     <Content Remove="wwwroot\lib\minuinet\miniuiExt.js" />
   </ItemGroup>
 
@@ -15,12 +27,14 @@
     <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="5.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="MiniProfiler.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\KAJ.Common\KAJ.Common.csproj" />
+    <ProjectReference Include="..\KAJ.CoreAuto\KAJ.CoreAuto.csproj" />
     <ProjectReference Include="..\KAJ.IRepository\KAJ.IRepository.csproj" />
     <ProjectReference Include="..\KAJ.IServices\KAJ.IServices.csproj" />
     <ProjectReference Include="..\KAJ.Model\KAJ.Model.csproj" />
@@ -30,6 +44,7 @@
     <None Include="wwwroot\lib\minuinet\baseMiniuiExt.js" />
     <None Include="wwwroot\lib\minuinet\boot.js" />
     <None Include="wwwroot\lib\minuinet\customCtrl.js" />
+    <None Include="wwwroot\lib\minuinet\flowBusLeft.js" />
     <None Include="wwwroot\lib\minuinet\miniuiExt.js" />
     <None Include="wwwroot\lib\minuinet\miniui\locale\en_US.js" />
     <None Include="wwwroot\lib\minuinet\miniui\locale\zh_CN.js" />

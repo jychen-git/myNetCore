@@ -1,11 +1,19 @@
 ﻿
 @{
-    ViewData["Title"] = "PageView";
-    Layout = "~/Views/Shared/_LayoutMini.cshtml";
+    ViewData["Title"] = "Index";
 }
+<body>
+    <h1>Pagination 分页表格</h1>
+
+    <div style="padding-bottom:5px;">
+
+        <span>员工姓名：</span><input type="text" id="key" />
+        <input type="button" value="查找" onclick="search()" />
+
+    </div>
 
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:250px;"
-         url="../data/AjaxService.aspx?method=SearchEmployees"
+         url=""
          idField="id" allowResize="true"
          sizeList="[20,30,50,100]" pageSize="20"
          showHeader="true" title="表格面板"
@@ -20,3 +28,4 @@
             <div field="createtime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">创建日期</div>
         </div>
     </div>
+</body>

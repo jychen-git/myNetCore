@@ -14,7 +14,7 @@ namespace KAJ.Core.Areas.UI.Controllers
             return View();
         }
 
-        public IActionResult PageView()
+        public IActionResult CoreView()
         {
             return View();
         }

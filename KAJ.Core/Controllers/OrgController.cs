@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data;
 using System.Threading.Tasks;
+using KAJ.Common.Helper;
+using System.Linq;
 
 namespace KAJ.Core.Controllers
 {
@@ -24,12 +26,24 @@ namespace KAJ.Core.Controllers
 
         public IActionResult Index()
         {
-            DataTable data = _orgServices.GetListData();
             return View();
+        }
+
+
+        public int Fun(int n)
+        {
+            if (n <= 0)
+                return 0;
+            else if (n > 0 && n <= 2)
+                return 1;
+            else return Fun(n - 1) + Fun(n - 2);
         }
 
         public IActionResult addOrg()
         {
+            SQLHelper sQLHelper = SQLHelper.CreateSqlHelper();
+            string sql = "SELECT  * FROM A_Org";
+            sQLHelper.ExecuteDataTable(sql);
             return View();
         }
 
@@ -52,7 +66,8 @@ namespace KAJ.Core.Controllers
             a_Org.Code = "AAA";
             a_Org.Name = "信息部";
             await _orgServices.Add(a_Org);
-
+            System.Collections.Generic.List<A_Org> a_Org2 = await _orgServices.Query(f => f.ID == "");
+            a_Org2.FirstOrDefault();
             return Json("");
         }
     }

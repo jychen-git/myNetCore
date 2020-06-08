@@ -1,8 +1,16 @@
 F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.CoreAuto.deps.json
 F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.CoreAuto.dll
 F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.CoreAuto.pdb
-F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.csproj.CoreCompileInputs.cache
 F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.AssemblyInfoInputs.cache
 F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.AssemblyInfo.cs
 F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.dll
 F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.pdb
+F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.csprojAssemblyReference.cache
+F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.Common.dll
+F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.Common.pdb
+F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.csproj.CopyComplete
+F:\0_Study\1_Core\KAJ.CoreAuto\obj\Debug\netcoreapp3.1\KAJ.CoreAuto.csproj.CoreCompileInputs.cache
+F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.IServices.dll
+F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.Model.dll
+F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.IServices.pdb
+F:\0_Study\1_Core\KAJ.CoreAuto\bin\Debug\netcoreapp3.1\KAJ.Model.pdb
