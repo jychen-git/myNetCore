@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +12,7 @@
     </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/minuinet/miniui/miniui.js"></script>
-    <script src="~/lib/minuinet/boot.js"></script>
+    @*<script src="~/lib/minuinet/boot.js"></script>*@
     <script src="~/lib/minuinet/baseMiniuiExt.js"></script>
     <script src="~/lib/minuinet/customCtrl.js"></script>
     <script src="~/lib/minuinet/miniuiExt.js"></script>
@@ -28,16 +28,11 @@
     </body>
     </html>*@
 
-<body style="background-color:#LightYellow">
-    <div id="loadShawde" style="height: 100%; width: 100%; position: absolute; background-color: #LightYellow; z-index: 9999; ">
-        <img style="margin-top: 25%; margin-left: 50%;" alt="" />
-    </div>
+<body>
     @RenderBody()
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         preInit();
-        $("#loadShawde").hide();
-
     </script>
 </body>
 </html>

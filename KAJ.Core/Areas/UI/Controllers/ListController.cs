@@ -10,13 +10,9 @@ namespace KAJ.Core.Areas.UI.Controllers
     [Area("UI")]
     public class ListController : BaseAutoListController
     {
-        public override IActionResult CoreView(string tmplCode)
-        {
-            return base.CoreView(tmplCode);
-        }
-
         public IActionResult Index()
         {
+            var ss = Request.Query[""];
             return View();
         }
     }

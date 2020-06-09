@@ -179,3 +179,4 @@ F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\Form\Cor
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\List\CoreView.cshtml.g.cs
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\_ViewStart.cshtml.g.cs
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\List\Index.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Areas\UI\Views\Form\IndexForm.cshtml.g.cs

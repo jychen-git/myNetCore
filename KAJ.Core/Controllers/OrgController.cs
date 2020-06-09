@@ -26,6 +26,7 @@ namespace KAJ.Core.Controllers
 
         public IActionResult Index()
         {
+            var ss = Request;
             return View();
         }
 

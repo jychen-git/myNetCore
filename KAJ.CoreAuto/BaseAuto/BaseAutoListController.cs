@@ -16,9 +16,10 @@ namespace KAJ.CoreAuto.BaseAuto
 
         private readonly SQLHelper sqlHelper = SQLHelper.CreateSqlHelper();
 
-        public virtual IActionResult CoreView(string tmplCode)
+        public virtual IActionResult CoreView()
         #region
         {
+            string tmplCode = Request.Query["tmplCode"].ToString();
             string sql = "SELECT  * FROM S_UI_List";
             List<S_UI_List> uiLists = sqlHelper.ExecuteList<S_UI_List>(sql).Where(c => c.Code == tmplCode).ToList();
             S_UI_List listDef = uiLists.FirstOrDefault();
@@ -107,6 +108,11 @@ namespace KAJ.CoreAuto.BaseAuto
 
         public JsonResult GetList()
         {
+            var aa = Request;
+            string tmplCode = aa.Query["tmplCode"].ToString();
+            string id = aa.Query["ID"].ToString();
+            var bb = HttpContext;
+            var cc = HttpContext.Request;
             return Json("");
         }
 

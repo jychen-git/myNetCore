@@ -10,14 +10,10 @@ namespace KAJ.Common.Helper
     {
         public static string ToJson<T>(T obj)
         {
-
-            if (obj == null || obj.ToString() == "null") return null;
-
+            if (obj == null || obj.ToString() == "null") 
+                return null;
             if (obj != null && (obj.GetType() == typeof(String) || obj.GetType() == typeof(string)))
-            {
                 return obj.ToString();
-            }
-
             IsoDateTimeConverter dt = new IsoDateTimeConverter();
             dt.DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss";
             return JsonConvert.SerializeObject(obj, dt);

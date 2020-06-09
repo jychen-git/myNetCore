@@ -122,7 +122,6 @@ var ncKey = '_ncCookie';
 var gridSortFields = {};
 var gridSortOrder = {};
 var gridAutoLoad = {};
-//window.status = "|a0." + new Date().getSeconds() + ":" + new Date().getMilliseconds();
 
 function preInit() {
 
@@ -173,22 +172,6 @@ function preInit() {
         $("a[onclick='showHelp();']").hide();
     }
     else {
-
-        //需要显示帮助按钮，如果帮助按钮不存在，则添加
-        //if ($(".gw-toolbar-right").find("a[onclick='showHelp()']").length == 0) {
-        //    var html = $(".gw-toolbar-right").html();
-        //    if (html == undefined || html == null) {
-        //        if ($(".mini-toolbar td").last().length != 0) {
-        //            $(".mini-toolbar td").last().html($(".mini-toolbar td").last().html() + '<a class="mini-button" onclick="showHelp()" iconcls="icon-help" plain="true">帮助</a>');
-        //        } else {
-        //            document.body.innerHTML +=
-        //                '<div style="position:absolute;height:10px;float:right;z-index:100;right:0;top:0;"><a class="mini-button" onclick="showHelp()" iconcls="icon-help" plain="true">帮助</a></div>';
-        //        }
-        //    } else {
-        //        html += '<a class="mini-button" onclick="showHelp()" iconcls="icon-help" plain="true">帮助</a>';
-        //        $(".gw-toolbar-right").html(html);
-        //    }
-        //}
     }
 
     //附加只读样式
@@ -506,78 +489,11 @@ function pageInit() {
         return;
     alreadyInit = true;
 
-    //初始化金格电子签名
-    var formId = getQueryString("ID");
-    if (typeof (Flow_JinGeDesign) != "undefined" && Flow_JinGeDesign == "True" && formId && jQuery(".mini-auditsign").length > 0) {
-
-        Signature.init({//初始化属性
-            clientConfig: {//初始化客户端参数
-                'SOFTTYPE': '0'//0为：标准版， 1：网络版
-            },
-            valid: false,    //签章和证书有效期判断， 缺省不做判断
-            icon_move: false, //移动签章按钮隐藏显示，缺省显示
-            icon_remove: false, //撤销签章按钮隐藏显示，缺省显示
-            icon_sign: false, //数字签名按钮隐藏显示，缺省显示
-            icon_signverify: false, //签名验证按钮隐藏显示，缺省显示
-            icon_sealinfo: false, //签章验证按钮隐藏显示，缺省显示
-            certType: 'client',//设置证书在签章服务器
-            sealType: 'client',//设置印章从签章服务器取
-            documentid: 'KG2016093001',//设置文档ID
-            documentname: '测试文档KG2016093001',//设置文档名称
-            pw_timeout: 's1800' //s：秒；h:小时；d:天
-        });
-
-        jQuery.ajax({
-            url: "/MvcConfig/UI/JinGeSign/GetSignList?FormId=" + formId,
-            type: "post",
-            success: function (text, textStatus) {
-                //增加新版报错分支
-                if (text && typeof (text) == "string" && text.indexOf("{\"errcode\"") == 0) {
-                    var fail = jQuery.parseJSON(text);
-                    var msg = getErrorFromHtml(fail.errmsg);
-                    msgUI(msg, 4);
-                    return;
-                }
-
-                var signs = mini.decode(text);
-                Signature.loadSignatures(signs);
-                Signature.bind({
-                    remove: function (fn) {//签章数据撤销时，将回调此方法，需要实现签章数据持久化（保存数据到后台数据库）,
-                        //console.log('获取删除的签章ID：' + this.getSignatureid());
-                        fn(true); //保存成功后必须回调fn(true/false)传入true/false分别表示保存成功和失败
-
-                    },
-                    update: function (fn) {//签章数据有变动时，将回调此方法，需要实现签章数据持久化（保存数据到后台数据库）,执行后必须回调fn(true/false)，传入true/false分别表示保存成功和失败
-                        //console.log('获取更新的签章ID：' + this.getSignatureid());
-                        //console.log('获取更新的签章数据：' + this.getSignatureData());
-                        fn(true);
-                    }
-                });
-
-
-                for (var i = 0; i < signs.length; i++) {
-
-                    $("#" + signs[i]["signUserId"]).html("");
-                }
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-
-            }
-        });
-
-    }
-
-
-    //地址栏中文参数问题（桂林工程的组织机构数据导入后，组织ID带中文出现乱码问题）
+    //地址栏中文参数
     jQuery(document).ajaxSend(function (event, request, options) {
         options.url = unescape(options.url);
-        //alert(options.url);
         options.url = decodeURI(options.url);
-        //alert(options.url);
         options.url = encodeURI(options.url);
-        //alert(options.url);
-        //基准方中项目组织ID里带+号，统一处理
         options.url = options.url.replace(/\+/g, function (e) {
             return "%2B";
         });
@@ -585,7 +501,6 @@ function pageInit() {
 
     if (getQueryString("FuncType").toLowerCase() == "view") {
         if (getQueryString("TaskExecID") == "") {
-            //toolbar改为只隐藏第一个td 2017-3-7 （中石化环保-张文华的修改请求，此修改需要其它项目验证）
             $(".mini-toolbar").each(function () {
                 var eles = $(this).find("td");
                 if (eles.length > 1) {
@@ -618,7 +533,6 @@ function pageInit() {
 
         //流程的表单控制
         flowFormControl();
-
 
         var $form = $("#" + normalParamSettings.formId);
         if ($form.attr("autogetdata") != "false") {  //如果不自动获取表单数据则直接退出方法
@@ -785,10 +699,6 @@ function pageInit() {
             grid.reload();
         }
     });
-
-    //$("input[readonly='']").attr("UNSELECTABLE", "on"); //IE下，只读控件不要光标，IE8和IE9有性能问题，注释掉
-    //    $("input[readonly='']").on({ focus: function () { this.blur(); } });
-    //    $("textarea[readonly='']").on({ focus: function () { this.blur(); } });
 }
 
 

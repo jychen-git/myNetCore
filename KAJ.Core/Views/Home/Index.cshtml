@@ -48,7 +48,7 @@
                     <li class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;">开发模式</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;">表单设计</a></dd>
+                            <dd><a href="javascript:void(0);" onClick="iframeChangeAutoForm();">表单设计</a></dd>
                             <dd><a href="javascript:void(0);" onClick="iframeChangeAutoList();">列表设计</a></dd>
                             <dd><a href="javascript:void(0);" onClick="iframeChangeDemoList();">列表Demo</a></dd>
                             <dd><a href="javascript:;">流程设计</a></dd>
@@ -91,8 +91,11 @@
         function iframeChangeList() {
             $('iframe').attr('src', "/UI/Form/CoreView");
         }
+        function iframeChangeAutoForm() {
+            $('iframe').attr('src', "/UI/Form/CoreView?tmplCode=CoreForm&ID=0a7fb00c3-9d93-41ea-a1c0-b60c84776c11");
+        }
         function iframeChangeAutoList() {
-            $('iframe').attr('src', "/UI/List/CoreView");
+            $('iframe').attr('src', "/UI/List/CoreView?tmplCode=CoreList&ID=ab2c00f2-89c2-4148-9dd2-e15e3485e183");
         }
         function iframeChangeDemoList() {
             $('iframe').attr('src', "/UI/List/Index");

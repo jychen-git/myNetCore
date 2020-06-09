@@ -3,234 +3,181 @@
     ViewData["Title"] = "PageView";
     Layout = "~/Views/Shared/_LayoutMini.cshtml";
 }
+@if (string.IsNullOrEmpty(ViewBag.IsPreView) && string.IsNullOrEmpty(ViewBag.FlowCode) && string.IsNullOrEmpty(ViewBag.TaskExecID) && (string.IsNullOrEmpty(ViewBag.FuncType) || ViewBag.FuncType.ToLower() != "view"))
+{
+    <div style='width: 100%; height: 28px;'>
+    </div>
+}
+else if ((!string.IsNullOrEmpty(ViewBag.FlowCode) || !string.IsNullOrEmpty(ViewBag.TaskExecID)))
+{
+    <div style='width: 100%; height: 28px;'>
+    </div>
+}
+<form id="dataForm" method="post" align="center" autogetdata="false">
+    <input name="ID" class="mini-hidden" />
+    @Html.Raw(ViewBag.HiddenHtml)
+    <div class="formDiv" style="background-color: #fff;">
+        @Html.Raw(ViewBag.FormHtml)
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.TaskExecID) || !string.IsNullOrEmpty(ViewBag.FlowCode))
+    {
+        <div class="flow-msg">
+            <fieldset class="formDiv">
+                <legend>操作信息</legend>
+                <div id="comment">
+                </div>
+                <div style='width: 100%; height: 15px;'>
+                </div>
+            </fieldset>
+        </div>
+        <br />
+        <br />
+        <script type="text/javascript">
+            function onCommentLoad(e) {
+                if (e.data.length == 0)
+                    $("#commentGrid").hide();
+            }
+        </script>
+    }
+    else if ((!string.IsNullOrEmpty(ViewBag.TaskExecID) || !string.IsNullOrEmpty(ViewBag.FlowCode)))
+    {
+        <div style='width: 100%; height: 120px;'>
+        </div>
+    }
+</form>
+@if (!string.IsNullOrEmpty(ViewBag.IsPreView))
+{
+}
+else if (!string.IsNullOrEmpty(ViewBag.FlowCode) || !string.IsNullOrEmpty(ViewBag.TaskExecID) || (!string.IsNullOrEmpty(ViewBag.FuncType) && ViewBag.FuncType.ToLower() == "view"))
+{
+    @*@Html.GetFlowbar()*@
+}
+else
+{
+    <div class="mini-toolbar" id="btnDiv" style="width: 100%; position: fixed; top: 0;
+        left: 0; z-index: 100;">
+        <table>
+            <tr>
+                <td>
+                    <a id="btnSave" class="mini-button" plain="true" iconcls="icon-save" onclick="save();">
+                        保存
+                    </a> <a id="btnCancel" class="mini-button" plain="true" iconcls="icon-cancel" onclick="closeWindow('close')">
+                        取消
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-<div id="form1">
-    <table>
-        <tr>
-            <td class="td1">不允许为空：</td>
-            <td>
-                <input class="mini-textbox" required="true" />
-            </td>
-            <td class="td2">required="true"</td>
-        </tr>
-        <tr>
-            <td class="td1">必须是邮箱地址：</td>
-            <td>
-                <input class="mini-textbox" vtype="email" required="true" />
-            </td>
-            <td class="td2">vtype="email"</td>
-        </tr>
-        <tr>
-            <td class="td1">必须是URL：</td>
-            <td>
-                <input class="mini-textbox" vtype="url" required="true" />
-            </td>
-            <td class="td2">vtype="url"</td>
-        </tr>
-        <tr>
-            <td class="td1">必须是整数(int)：</td>
-            <td>
-                <input class="mini-textbox" vtype="int" required="true" />
-            </td>
-            <td class="td2">vtype="int"</td>
-        </tr>
-        <tr>
-            <td class="td1">必须是数字(float)：</td>
-            <td>
-                <input class="mini-textbox" vtype="float" required="true" />
-            </td>
-            <td class="td2">vtype="float"</td>
-        </tr>
-        <tr>
-            <td class="td1">字符串长度（<= 6）：</td>
-            <td>
-                <input class="mini-textbox" vtype="maxLength:6" required="true" />
-            </td>
-            <td class="td2">vtype="maxLength:6"</td>
-        </tr>
-        <tr>
-            <td class="td1">字符串长度（>= 2）：</td>
-            <td>
-                <input class="mini-textbox" vtype="minLength:2" required="true" />
-            </td>
-            <td class="td2">vtype="minLength:2"</td>
-        </tr>
-        <tr>
-            <td class="td1">字符串长度（2-6）：</td>
-            <td>
-                <input class="mini-textbox" vtype="rangeLength:2,6" required="true" />
-            </td>
-            <td class="td2">vtype="rangeLength:2,6"</td>
-        </tr>
-        <tr>
-            <td class="td1">字符数个数（2-6）：</td>
-            <td>
-                <input class="mini-textbox" vtype="rangeChar:2,6" required="true" />
-            </td>
-            <td class="td2">vtype="rangeChar:2,6"</td>
-        </tr>
-        <tr>
-            <td class="td1">数字范围（0-100）：</td>
-            <td>
-                <input class="mini-textbox" vtype="range:0,100" required="true" />
-            </td>
-            <td class="td2">vtype="range:0,100"</td>
-        </tr>
-        <tr>
-            <td class="td1">必须是日期格式（如yyyy-MM-dd）：</td>
-            <td>
-                <input class="mini-textbox" vtype="date:yyyy-MM-dd" required="true" />
-            </td>
-            <td class="td2">vtype="date:yyyy-MM-dd"</td>
-        </tr>
-        <tr>
-            <td class="td1">必须是日期格式（如MM/dd/yyyy）：</td>
-            <td>
-                <input class="mini-textbox" vtype="date:MM/dd/yyyy" required="true" />
-            </td>
-            <td class="td2">vtype="date:MM/dd/yyyy"</td>
-        </tr>
-        <tr>
-            <td class="td1" style="color:Red;">邮箱格式，5~20个字符（组合）：</td>
-            <td>
-                <input class="mini-textbox" vtype="email;rangeLength:5,20;" required="true" />
-            </td>
-            <td class="td2">vtype="email;rangeLength:5,20;"</td>
-        </tr>
-        <tr>
-            <td class="td1" style="color:Red;">必须输入英文（自定义）：</td>
-            <td>
-                <input class="mini-textbox" onvalidation="onEnglishValidation" />
-            </td>
-            <td class="td2">onvalidation="onEnglishValidation"</td>
-        </tr>
-        <tr>
-            <td class="td1" style="color:blue;">必须输入英文（自定义vtype）：</td>
-            <td>
-                <input class="mini-textbox" vtype="english" />
-            </td>
-            <td class="td2">vtype="english"</td>
-        </tr>
-        <tr>
-            <td class="td1" style="color:Red;">必须输入英文+数字（自定义）：</td>
-            <td>
-                <input class="mini-textbox" onvalidation="onEnglishAndNumberValidation" />
-            </td>
-            <td class="td2">onvalidation="onEnglishAndNumberValidation"</td>
-        </tr>
-        <tr>
-            <td class="td1" style="color:Red;">必须输入中文（自定义）：</td>
-            <td>
-                <input class="mini-textbox" onvalidation="onChineseValidation" />
-            </td>
-            <td class="td2">onvalidation="onChineseValidation"</td>
-        </tr>
-        <tr>
-            <td class="td1" style="color:Red;">身份证验证15~18位（自定义）：</td>
-            <td>
-                <input class="mini-textbox" onvalidation="onIDCardsValidation" />
-            </td>
-            <td class="td2">onvalidation="onIDCardsValidation"</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input value="Login" type="button" onclick="submitForm()" />
-            </td>
-        </tr>
-    </table>
-</div>
+}
 
 <script type="text/javascript">
-    function submitForm() {
-        var form = new mini.Form("#form1");
 
-        form.validate();
-        if (form.isValid() == false) return;
+    @Html.Raw(ViewBag.DataSource);
+    var formData=@Html.Raw(ViewBag.FormData);
+    var fieldInfo=@Html.Raw(ViewBag.FieldInfo);
+    @Html.Raw(ViewBag.Script)
+</script>
+@{
+    if (ViewBag.VirtualScroll == "true")
+    {
+        <style type="text/css">
+            .mini-grid-cell {
+                padding-left: 4px;
+                padding-right: 2px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                border-right: #ececec 1px solid;
+            }
+        </style>
+    }
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tip = new mini.ToolTip();
+        tip.set({
+            target: document,
+            selector: '[data-tooltip]'
+        });
 
-        //提交数据
-        var data = form.getData();
-        var json = mini.encode(data);
-        $.ajax({
-            url: "../data/FormService.aspx?method=SaveData",
-            type: "post",
-            data: { submitData: json },
-            success: function (text) {
-                alert("提交成功，返回结果:" + text);
+
+        var form = new mini.Form("dataForm");
+        form.setData(formData);
+        form.setChanged(false);
+
+        //UEditor控件
+        var arrTxtAreas = $("script.UEditor");
+        $.each(arrTxtAreas, function (i, obj) {
+            var name = $(obj).attr("name");
+            UE.getEditor(name).addListener('ready', function (editor) {
+                UE.getEditor(name).setContent(formData[name], false);//Content
+            });
+        });
+
+        //将地址栏参数赋值给form的空值隐藏控件
+        $("form .mini-hidden").each(function () {
+            var name = $(this).attr("name");
+            if (hasQueryString(name)) {
+                var field = mini.getbyName(name);
+                if (field.getValue() == "")
+                    field.setValue(getQueryString(name));
             }
         });
-    }
-    ////////////////////////////////////////
-    function onEnglishValidation(e) {
-        if (e.isValid) {
-            if (isEnglish(e.value) == false) {
-                e.errorText = "必须输入英文";
-                e.isValid = false;
-            }
+
+        //大字段赋值给Grid
+        $("form .mini-datagrid").each(function () {
+            var id = $(this).attr("id");
+            if ((formData || 0)[id] != undefined)
+                mini.get(id).setData(mini.decode(formData[id]));
+        });
+
+        var _returnForm = null;
+        //调用界面上的onFormSetValue方法
+        if (typeof (onFormSetData) != "undefined")
+            _returnForm = onFormSetData(formData);
+
+        //流程：加载FlowBar
+        var flowMenubar = mini.get("flowMenubar");
+        if (flowMenubar != undefined) {
+            flowLoadMenubar(_returnForm);
         }
-    }
-    function onEnglishAndNumberValidation(e) {
-        if (e.isValid) {
-            if (isEnglishAndNumber(e.value) == false) {
-                e.errorText = "必须输入英文+数字";
-                e.isValid = false;
-            }
+
+
+    });
+
+</script>
+<script type="text/javascript">
+    function onSummaryRenderer(e) {
+        var title = "";
+        switch (e.column.summaryType) {
+            case "count":
+                title = "总数：";
+                break;
+            case "max":
+                title = "最大：";
+                break;
+            case "min":
+                title = "最小：";
+                break;
+            case "sum":
+                title = "总计：";
+                break;
+            case "avg":
+                title = "平均：";
+                break;
         }
-    }
-    function onChineseValidation(e) {
-        if (e.isValid) {
-            if (isChinese(e.value) == false) {
-                e.errorText = "必须输入中文";
-                e.isValid = false;
-            }
-        }
-    }
-    function onIDCardsValidation(e) {
-        if (e.isValid) {
-            var pattern = /\d*/;
-            if (e.value.length < 15 || e.value.length > 18 || pattern.test(e.value) == false) {
-                e.errorText = "必须输入15~18位数字";
-                e.isValid = false;
-            }
-        }
-    }
-
-    ////////////////////////////////////
-    /* 是否英文 */
-    function isEnglish(v) {
-        var re = new RegExp("^[a-zA-Z\_]+$");
-        if (re.test(v)) return true;
-        return false;
-    }
-
-    /* 是否英文+数字 */
-    function isEnglishAndNumber(v) {
-
-        var re = new RegExp("^[0-9a-zA-Z\_]+$");
-        if (re.test(v)) return true;
-        return false;
-    }
-
-    /* 是否汉字 */
-    function isChinese(v) {
-        var re = new RegExp("^[\u4e00-\u9fa5]+$");
-        if (re.test(v)) return true;
-        return false;
-    }
-
-    /*自定义vtype*/
-    mini.VTypes["englishErrorText"] = "请输入英文";
-    mini.VTypes["english"] = function (v) {
-        var re = new RegExp("^[a-zA-Z\_]+$");
-        if (re.test(v)) return true;
-        return false;
+        e.cellHtml = "<div style='width:100%;text-align:right;'>" + title + (e.cellHtml.toFixed ? e.cellHtml.toFixed(2) : e.cellHtml) + "</div>";
+        return e.cellHtml;
     }
 
 </script>
+<script type="text/javascript">
+    addMultiUserSelector("ReceiverIDs");
+    $("table").css("border-collapse", "collapse");
+</script>
+<style>
+    body {
+        background-color: #fff;
+    }
+</style>
 
-<div class="description">
-    <h3>Description</h3>
-    <p>
-
-    </p>
-</div>

@@ -1,12 +1,14 @@
 ﻿using KAJ.Common.Helper;
 using KAJ.IServices;
 using KAJ.Model.Models;
+using KAJ.Model.UI;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
@@ -1565,7 +1567,464 @@ namespace KAJ.CoreAuto.BaseFormula
         }
         #endregion
         //
-        public  List<string> GetFixedWidthFields(string code)
+
+
+        #region CreateFormHtml
+
+        public string CreateFormHtml(S_UI_Form formInfo)
+        {
+            string uiRegStr = "\\{[()（），。、；,.;0-9a-zA-Z_\u4e00-\u9faf]*\\}";
+            var items = JsonHelper.ToObject<List<FormItem>>(formInfo.Items);
+            Regex reg = new Regex(uiRegStr);
+
+            string layout = formInfo.Layout;
+
+            string script = "";
+            //去除所有的换行符号，以免样式出现多余的空格
+            layout = Regex.Replace(layout, "<br/>|<BR/>", (Match m) => { return ""; });
+            Regex regHelper = new Regex(@"(?<=>)([\n\s\S]*?)(?=<)");
+            layout = regHelper.Replace(layout ?? "", (Match m) =>
+            {
+                string value = m.Value.Trim(' ', '\n', '\t');
+                if (value.StartsWith("{"))
+                    return m.Value;
+                var item = items.SingleOrDefault(c => c.Name == value);
+                if (item == null)
+                    return m.Value;
+                return null;
+            });
+
+            var str = "<script type='text/javascript'>";
+            str += script;
+            str += "\n</script>";
+            layout = str + layout;
+
+            string result = reg.Replace(layout ?? "", (Match m) =>
+            {
+                string value = m.Value.Trim('{', '}');
+                FormItem item = items.SingleOrDefault(c => c.Name == value);
+                if (item == null) return m.Value;
+                return GetFormItemHtml(formInfo, item);
+
+            });
+
+            return result;
+        }
+
+        private string GetFormItemHtml(S_UI_Form formInfo, FormItem item)
+        {
+            #region 控件类型为子表时
+
+            if (item.ItemType == "SubTable")
+            {
+                return CreateSubTableHtml(formInfo, item);
+            }
+
+            #endregion
+
+            string miniuiSettings = GetMiniuiSettings(item.Settings);
+            if (miniuiSettings == "")
+            {
+                if (item.ItemType == "MultiFile") //增加兼容写法：流程路由的动态判断必填显示正常
+                    miniuiSettings = "required='false' style='width:100%'";
+                else
+                    miniuiSettings = "style='width:100%'";
+            }
+            string dataPty = ""; //控件的data属性
+
+            if (item.ItemType == "TextBox" | item.ItemType == "TextArea")
+            {
+                if (!miniuiSettings.Contains("maxLength"))
+                {
+                    if (item.FieldType == "nvarchar(50)")
+                        miniuiSettings += " maxLength='50'";
+                    if (item.FieldType == "nvarchar(200)")
+                        miniuiSettings += " maxLength='200'";
+                    if (item.FieldType == "nvarchar(500)")
+                        miniuiSettings += " maxLength='500'";
+                    if (item.FieldType == "nvarchar(2000)")
+                        miniuiSettings += " maxLength='2000'";
+                }
+            }
+            else if (item.ItemType == "UEditor")
+            {
+                string height = "250px";
+                if (!string.IsNullOrEmpty(item.Settings))
+                {
+                    var dic = JsonHelper.ToObject(item.Settings);
+                    height = dic["style_height"].ToString();
+                }
+                return string.Format("<script id='{0}' name='{0}' class='UEditor' type='text/plain' style='width:100%;height:{1}'></script>", item.Code, height);
+            }
+            else if (item.ItemType == "CheckBoxList" || item.ItemType == "RadioButtonList" || item.ItemType == "ComboBox")
+            {
+                dataPty = GetFormItemDataPty(formInfo.TableName, item.Code, item.Settings);
+            }
+
+            return string.Format("<input name='{0}' {5} class='mini-{1}' {2} {3} {4} {6}/>"
+                , item.Code, item.ItemType.ToLower(), miniuiSettings
+                , item.Enabled == "true" ? "" : "enabled='false'"
+                , item.Visible == "true" ? "" : "visible='false'"
+                , item.ItemType == "ButtonEdit" ? string.Format("textName='{0}Name'", item.Code) : ""
+                , dataPty
+                );
+        }
+
+        #endregion
+
+
+        #region CreateSubTableHtml
+
+        private string CreateSubTableHtml(S_UI_Form formInfo, FormItem formItem)
+        {
+            if (string.IsNullOrEmpty(formItem.Settings))
+                return "";
+            var dic = JsonHelper.ToObject(formItem.Settings);
+            if (string.IsNullOrEmpty(dic.GetValue("listData")))
+                return "";
+            var list = JsonHelper.ToObject<List<FormItem>>(dic["listData"].ToString());
+            if (list.Count == 0)
+                return "";
+
+            //默认值Dic
+            var defaultDic = new Dictionary<string, string>();
+            foreach (var item in list)
+            {
+
+                if (string.IsNullOrEmpty(item.DefaultValue))
+                    continue;
+                if (item.DefaultValue.Contains(',') && item.ItemType == "ButtonEdit")
+                {
+                    defaultDic.Add(item.Code, GetDefaultValue(item.Code, item.DefaultValue.Split(',').First(), GetDefaultValueDic(formInfo.DefaultValueSettings)));
+                    defaultDic.Add(item.Code + "Name", GetDefaultValue(item.Code, item.DefaultValue.Split(',').Last(), GetDefaultValueDic(formInfo.DefaultValueSettings)));
+                }
+                else
+                {
+                    defaultDic.Add(item.Code, GetDefaultValue(item.Code, item.DefaultValue, GetDefaultValueDic(formInfo.DefaultValueSettings)));
+                }
+            }
+
+            string miniuiSettings = GetMiniuiSettings(dic["formData"].ToString());
+            if (miniuiSettings == "")
+                miniuiSettings = "style='width:100%;height:100px;'";
+
+            var dicSubTableSettings = JsonHelper.ToObject(dic["formData"].ToString());
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat(@"
+<div id='toolbar{3}' class='mini-toolbar'  style='height:25px;border-bottom: 0px;{4}'>
+    <table>
+        <tr>
+            <td style='text-align:left;'>
+                <a class='mini-button' id='btn{3}Add' iconcls='icon-add' onclick='addRow({0});' visible='{5}'>添加</a>
+                <a class='mini-button' id='btn{3}Delete' iconcls='icon-remove' onclick='delRow({1});' visible='{6}'>移除</a>
+                <a class='mini-button' iconcls='icon-up' onclick='moveUp({2});' visible='{7}'>上移</a>
+                <a class='mini-button' iconcls='icon-down' onclick='moveDown({2});' visible='{8}'>下移</a>
+            </td>
+        </tr>
+    </table>
+</div>
+", JsonHelper.ToJson(defaultDic) + ",{gridId:\"" + formItem.Code + "\",isLast:true}"
+ , "{gridId:\"" + formItem.Code + "\"}"
+ , "\"" + formItem.Code + "\""
+ , formItem.Code
+ , dicSubTableSettings.ContainsKey("ShowToolbar") && dicSubTableSettings["ShowToolbar"].ToString() == "false" ? "display:none;" : ""
+ , dicSubTableSettings.ContainsKey("ShowBtnAdd") && dicSubTableSettings["ShowBtnAdd"].ToString() == "false" ? "false" : "true"
+ , dicSubTableSettings.ContainsKey("ShowBtnRemove") && dicSubTableSettings["ShowBtnRemove"].ToString() == "false" ? "false" : "true"
+ , dicSubTableSettings.ContainsKey("ShowBtnUp") && dicSubTableSettings["ShowBtnUp"].ToString() == "false" ? "false" : "true"
+ , dicSubTableSettings.ContainsKey("ShowBtnDown") && dicSubTableSettings["ShowBtnDown"].ToString() == "false" ? "false" : "true"
+ );
+
+
+            sb.AppendFormat(@" 
+        <div id='{0}' {1} {2} {3} class='mini-datagrid' {4} {5} allowcellvalid='true' multiselect='true' allowcelledit='true' allowcellselect='true' showpager='false' allowUnselect='false' sortMode='client'>
+ ", formItem.Code, miniuiSettings
+  , formItem.Enabled == "true" ? "" : "enabled='false'"
+  , formItem.Visible == "true" ? "" : "visible='false'"
+  , dicSubTableSettings.GetValue("IsVirtualScroll") == "true" ? "virtualScroll='true'" : ""
+  , dicSubTableSettings.GetValue("IsVirtualColumns") == "true" ? "virtualColumns='true'" : ""
+  );
+            sb.Append(@"
+ <div property='columns'>
+");
+            if (dicSubTableSettings.ContainsKey("showIndexColumn") && dicSubTableSettings["showIndexColumn"].ToString() == "true")
+            {
+                sb.Append(@"
+            <div type='indexcolumn'></div>
+");
+            }
+
+            if (dicSubTableSettings.ContainsKey("showCheckColumn") && dicSubTableSettings["showCheckColumn"].ToString() == "true")
+            {
+                sb.AppendFormat(@"       
+            <div type='checkcolumn'></div>
+");
+            }
+
+
+            string currentTopHeader = "";
+            foreach (var item in list)
+            {
+                if (item.Visible == "false")
+                    continue;
+                #region 获取vtype
+                string vtype = "";
+                if (!string.IsNullOrEmpty(item.Settings))
+                {
+                    var _dic = JsonHelper.ToObject<Dictionary<string, string>>(item.Settings);
+                    if (_dic.ContainsKey("required") && _dic["required"] == "true")
+                        vtype += "required;";
+                    if (_dic.ContainsKey("vtype"))
+                        vtype += _dic["vtype"];
+                }
+                #endregion
+
+                #region 特殊控件处理
+                if (item.ItemType == "CheckBox")
+                {
+                    sb.AppendFormat("\n<div type='checkboxcolumn' field='{0}' header='{1}' {2} {3}></div>"
+                        , item.Code
+                        , item.Name
+                        , GetMiniuiSettings(JsonHelper.ToJson(item))
+                        , GetMiniuiSettings(item.Settings)
+                        );
+                    continue;
+                }
+                else if (item.ItemType == "SingleFile")
+                {
+                    sb.AppendFormat(@"
+<div field='{0}' displayfield='{0}Name' header='{1}' {2}  renderer='onFileRender' {4}>
+    <input property='editor' class='mini-fileupload' onclick='btnUploadifiveClick' style='width: 100%;' label='{3}' />  
+</div>"
+                       , item.Code
+                       , item.Name
+                       , GetMiniuiSettings(JsonHelper.ToJson(item))
+                       , item.Settings
+                       , vtype == "" ? "" : string.Format("vtype='{0}'", vtype)
+                       );
+                    continue;
+                }
+                #endregion
+
+                var subTableItemCode = formItem.Code + "." + item.Code;
+
+                miniuiSettings = GetMiniuiSettings(item.Settings ?? "");
+                if (miniuiSettings == "")
+                    miniuiSettings = "style='width:100%'";
+
+                string ColumnSettings = GetMiniuiSettings(item.ColumnSettings ?? "");//列格式
+
+                string dataPty = "";
+                if (item.ItemType == "ComboBox")
+                {
+                    string tableName = formInfo.TableName + "_" + formItem.Code;
+                    dataPty = GetFormItemDataPty(tableName, item.Code, item.Settings);
+                }
+
+                string comboBoxPty = "type='comboboxcolumn'";
+                if (item.ItemType == "ComboBox")
+                {
+                    var columSettingsDic = JsonHelper.ToObject(item.Settings);
+                    if (columSettingsDic.ContainsKey("textName") && columSettingsDic["textName"].ToString() != "")
+                        comboBoxPty = string.Format("displayField='{0}'", columSettingsDic["textName"]);
+                }
+
+                //多表头处理
+                string header = item.Name;
+                if (header == null) header = "";
+                //判断闭合
+                if (currentTopHeader != "" && header.StartsWith(currentTopHeader + ".") == false)
+                {
+                    sb.AppendLine("</div></div>");
+                    currentTopHeader = "";
+                }
+                if (header.Contains('.'))
+                {
+                    string topHeader = header.Split('.').First();
+
+                    if (topHeader != currentTopHeader)
+                    {
+                        currentTopHeader = topHeader;
+                        //新的多表头                       
+                        sb.AppendFormat("<div header='{0}' headerAlign='center'><div property='columns'>", topHeader);
+                    }
+                }
+
+                string itemHtml = CreateSubTableItem(item, ColumnSettings, miniuiSettings, vtype, comboBoxPty, dataPty, formItem.Code);
+                sb.Append(itemHtml);
+            }
+            //循环结束，闭合多表头
+            if (currentTopHeader != "")
+            {
+                currentTopHeader = "";
+                sb.AppendLine("</div></div>");
+            }
+
+            sb.AppendFormat(@"
+                </div>
+            </div>");
+            return sb.ToString();
+        }
+
+        private string CreateSubTableItem(FormItem item, string ColumnSettings, string miniuiSettings, string vtype, string comboBoxPty, string dataPty, string formItemCode)
+        {
+            var name = item.Name.Split('.').LastOrDefault();
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (!string.IsNullOrWhiteSpace(item.ColumnSettings))
+                dic = JsonHelper.ToObject(item.ColumnSettings);
+            string html = string.Format(@"
+        <div name='{3}' field='{3}' {8} header='{4}' {5} {6} {7} {0} autoShowPopup='true' {12} {13} allowSort='true'>
+                <input {9} property='editor' class='mini-{1}' {2} {10} {11} {14} />
+        </div>"
+            , GetMiniuiSettings(JsonHelper.ToJson(item))
+            , item.ItemType.ToLower()
+            , miniuiSettings
+            , item.Code
+            , name
+            , item.ItemType == "DatePicker" && ColumnSettings.IndexOf("dateFormat") >= 0 ? "dateFormat='" + dic.GetValue("dateFormat") + "'" : ""
+            , item.ItemType == "ComboBox" ? comboBoxPty : ""
+            , vtype == "" ? "" : string.Format("vtype='{0}'", vtype)
+            , item.ItemType == "ButtonEdit" ? "displayfield='" + item.Code + "Name'" : ""
+            , item.ItemType == "ButtonEdit" ? " name='" + formItemCode + "_" + item.Code + "'" : ""  
+            , item.ItemType == "ComboBox" && miniuiSettings.Contains("multiselect='true'") == false && miniuiSettings.Contains("onitemclick=") == false ? "onitemclick=\"commitGridEdit('" + formItemCode + "');\"" : ""
+            , item.ItemType == "DatePicker" ? "onhidepopup=\"commitGridEdit('" + formItemCode + "');\"" : ""
+            , string.IsNullOrEmpty(item.SummaryType) ? "" : string.Format("summaryType='{0}' summaryRenderer='onSummaryRenderer'", item.SummaryType)
+            , ColumnSettings
+            , dataPty
+            );
+            return html;
+        }
+
+        #endregion
+
+
+        #region CreateFormHiddenHtml
+
+        public string CreateFormHiddenHtml(S_UI_Form form)
+        {
+            StringBuilder sb = new StringBuilder();
+            var items = JsonHelper.ToObject<List<FormItem>>(form.Items).Where(c => String.IsNullOrWhiteSpace(c.ItemType));
+
+            foreach (var item in items)
+            {
+                sb.AppendFormat("\n<input name=\"{0}\" class=\"mini-hidden\" />", item.Code);
+            }
+
+            items = JsonHelper.ToObject<List<FormItem>>(form.Items).Where(c => !String.IsNullOrWhiteSpace(c.ItemType) && c.Visible == "false");
+            foreach (var item in items)
+            {
+                if (item.ItemType == "SubTable")
+                    continue;
+                sb.AppendFormat(GetFormItemHtml(form, item));
+            }
+
+            return sb.ToString();
+        }
+
+        #endregion
+
+        #region CreateFormScript
+
+        public string CreateFormScript(S_UI_Form form, bool isOutput = false)
+        {
+            StringBuilder sb = new StringBuilder("\n");
+            var list = JsonHelper.ToObject<List<FormItem>>(form.Items);
+
+            #region 添加系统枚举
+
+            //获取数据源配置信息，枚举如果是设置的数据源，后续则不再进行枚举获取
+            var defaultValueSettings = new List<Dictionary<string, object>>();
+            if (!String.IsNullOrEmpty(form.DefaultValueSettings))
+            {
+                defaultValueSettings = JsonHelper.ToList(form.DefaultValueSettings);
+            }
+            foreach (var item in list)
+            {
+                if (string.IsNullOrEmpty(item.Settings))
+                    continue;
+                if (item.ItemType == "CheckBoxList" || item.ItemType == "RadioButtonList" || item.ItemType == "ComboBox")
+                {
+                    var dic = JsonHelper.ToObject(item.Settings);
+                    var data = dic["data"].ToString().Trim();
+                    if (data == "")
+                        continue;
+
+                    //获取数据源配置信息，枚举如果是设置的数据源，后续则不再进行枚举获取
+                    if (!data.StartsWith("[") && data.Split('.').Length == 1)
+                    {
+                        if (defaultValueSettings.Exists(c => c.ContainsKey("Code") && c["Code"].ToString() == data))
+                            continue;
+                    }
+
+                    var key = GetEnumKey(form.TableName, item.Code, data);
+                    var enumStr = GetEnumString(form.ConnName, form.TableName, item.Code, data);
+
+                    if (!string.IsNullOrEmpty(enumStr))
+                    {
+                        if (isOutput)
+                            sb.Append(GetOutputEnumString(form.ConnName, form.TableName, item.Code, data));
+                        else
+                            sb.AppendFormat("\n var {0} = {1}; ", key, enumStr);
+                    }
+                }
+
+                if (item.ItemType == "SubTable")
+                {
+                    var _dic = JsonHelper.ToObject(item.Settings);
+                    var subTableItems = JsonHelper.ToObject<List<FormItem>>(_dic["listData"].ToString());
+                    foreach (var subItem in subTableItems)
+                    {
+                        if (string.IsNullOrEmpty(subItem.Settings))
+                            continue;
+                        if (subItem.ItemType == "ComboBox")
+                        {
+                            var dic = JsonHelper.ToObject(subItem.Settings);
+                            var data = dic["data"].ToString().Trim();
+                            if (data == "")
+                                continue;
+
+                            string tableName = form.TableName + "_" + item.Code;
+                            string key = GetEnumKey(tableName, subItem.Code, data);
+                            string enumStr = GetEnumString(form.ConnName, tableName, subItem.Code, data);
+                            if (!string.IsNullOrEmpty(enumStr))
+                            {
+                                if (isOutput)
+                                    sb.AppendFormat(GetOutputEnumString(form.ConnName, tableName, subItem.Code, data));
+                                else
+                                    sb.AppendFormat("\n var {0} = {1}; ", key, enumStr);
+                            }
+                        }
+                    }
+                }
+            }
+
+            #endregion
+
+            sb.Append(@"
+function commitGridEdit(gridId) { 
+    var grid = mini.get(gridId);        
+    grid.commitEdit();    
+}
+function moveUp(gridId) {
+    var dataGrid = mini.get(gridId);
+    var rows = dataGrid.getSelecteds();
+    dataGrid.moveUp(rows);
+}
+function moveDown(gridId) {
+    var dataGrid = mini.get(gridId);
+    var rows = dataGrid.getSelecteds();
+    dataGrid.moveDown(rows);
+}    
+");
+            sb.AppendLine();
+            sb.Append(HtmlEncoder.Default.Encode(form.ScriptText));
+
+            return sb.ToString();
+        }
+
+        #endregion
+
+
+        public List<string> GetFixedWidthFields(string code)
         {
             string sql = "SELECT  * FROM S_UI_List";
             List<S_UI_List> uiLists = sqlHelper.ExecuteList<S_UI_List>(sql).Where(c => c.Code == code).ToList();
@@ -1585,6 +2044,22 @@ namespace KAJ.CoreAuto.BaseFormula
             }
             return list;
         }
+
+        public DataTable GetFieldInfo(S_UI_Form form)
+        {
+            var itemList = form.Items;
+            var list = JsonHelper.ToObject<List<FormItem>>(itemList);
+            DataTable table = new DataTable();
+            table.Rows.Add(table.NewRow());
+            foreach (var item in list)
+            {
+                DataColumn dc = new DataColumn(item.Code, typeof(string));
+                table.Columns.Add(dc);
+                table.Rows[0][item.Code] = item.Name;
+            }
+            return table;
+        }
         //
+
     }
 }
