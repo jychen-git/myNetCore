@@ -4,35 +4,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - KAJ.Core</title>
-    <script type="text/javascript">
-        //TODO by cjy
-        //GetBasicInfo参数分别为：当前用户信息、按钮字段权限、动态文件服务器地址和当前流程环节
-        //请根据具体需要调整true或false
-        @*@Html.GetBasicInfo(true, true, false, true);*@
-    </script>
+
+    <link href="~/lib/minuinet/miniui/default/miniui/miniui.css" rel='stylesheet' type='text/css' />
+    <link href="~/lib/minuinet/miniui/default/miniui/icons.css" rel='stylesheet' type='text/css' />
+    <link href="~/lib/minuinet/miniui/default/miniui/miniextend.css" rel='stylesheet' type='text/css' />
+    <link href="~/lib/minuinet/uploadify/uploadifive.css" rel='stylesheet' type='text/css' />
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/minuinet/miniui/miniui.js"></script>
-    @*<script src="~/lib/minuinet/boot.js"></script>*@
     <script src="~/lib/minuinet/baseMiniuiExt.js"></script>
     <script src="~/lib/minuinet/customCtrl.js"></script>
     <script src="~/lib/minuinet/miniuiExt.js"></script>
     <script src="~/lib/minuinet/flowBusLeft.js"></script>
-
+    <script src="~/lib/minuinet/uploadify/jquery.uploadifive.min.js"></script>
 </head>
 
-@*<body>
-        @RenderBody()
-        <script type="text/javascript">
-            mini.parse();
-        </script>
-    </body>
-    </html>*@
-
-<body>
+<body style="background-color:#fff">
+    <div id="loadShawde" style="height: 100%; width: 100%; position: absolute; background-color: #ebedf2; z-index: 9999; ">
+        <img style="margin-top: 25%; margin-left: 50%;" src="~/lib/minuinet/miniui/default/miniui/images/_pager/loading.gif" alt="" />
+    </div>
     @RenderBody()
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         preInit();
+        $("#loadShawde").hide();
+
+    </script>
+    <script type="text/javascript">
+        preInit();
+        $("#loadShawde").hide();
+
     </script>
 </body>
 </html>

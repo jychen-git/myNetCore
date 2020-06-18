@@ -1,0 +1,12 @@
+F:\0_Study\1_Core\KAJ.IServices\bin\Release\netcoreapp3.1\KAJ.IServices.deps.json
+F:\0_Study\1_Core\KAJ.IServices\bin\Release\netcoreapp3.1\KAJ.IServices.dll
+F:\0_Study\1_Core\KAJ.IServices\bin\Release\netcoreapp3.1\KAJ.IServices.pdb
+F:\0_Study\1_Core\KAJ.IServices\bin\Release\netcoreapp3.1\KAJ.Model.dll
+F:\0_Study\1_Core\KAJ.IServices\bin\Release\netcoreapp3.1\KAJ.Model.pdb
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.csprojAssemblyReference.cache
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.csproj.CoreCompileInputs.cache
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.AssemblyInfoInputs.cache
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.AssemblyInfo.cs
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.csproj.CopyComplete
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.dll
+F:\0_Study\1_Core\KAJ.IServices\obj\Release\netcoreapp3.1\KAJ.IServices.pdb

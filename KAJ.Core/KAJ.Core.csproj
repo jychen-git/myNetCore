@@ -6,13 +6,21 @@
 
   <ItemGroup>
     <Compile Remove="JsLibrary\**" />
+    <Compile Remove="wwwroot\css\Default\**" />
     <Compile Remove="wwwroot\lib\minuinet\res\**" />
+    <Compile Remove="wwwroot\lib\minuinet\新文件夹\**" />
     <Content Remove="JsLibrary\**" />
+    <Content Remove="wwwroot\css\Default\**" />
     <Content Remove="wwwroot\lib\minuinet\res\**" />
+    <Content Remove="wwwroot\lib\minuinet\新文件夹\**" />
     <EmbeddedResource Remove="JsLibrary\**" />
+    <EmbeddedResource Remove="wwwroot\css\Default\**" />
     <EmbeddedResource Remove="wwwroot\lib\minuinet\res\**" />
+    <EmbeddedResource Remove="wwwroot\lib\minuinet\新文件夹\**" />
     <None Remove="JsLibrary\**" />
+    <None Remove="wwwroot\css\Default\**" />
     <None Remove="wwwroot\lib\minuinet\res\**" />
+    <None Remove="wwwroot\lib\minuinet\新文件夹\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +28,8 @@
     <Content Remove="wwwroot\lib\minuinet\boot.js" />
     <Content Remove="wwwroot\lib\minuinet\customCtrl.js" />
     <Content Remove="wwwroot\lib\minuinet\flowBusLeft.js" />
+    <Content Remove="wwwroot\lib\minuinet\JavaScript.js" />
+    <Content Remove="wwwroot\lib\minuinet\miniuiCssInit.js" />
     <Content Remove="wwwroot\lib\minuinet\miniuiExt.js" />
   </ItemGroup>
 
@@ -27,6 +37,7 @@
     <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="MiniProfiler.AspNetCore" Version="4.1.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
@@ -42,7 +53,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\lib\minuinet\baseMiniuiExt.js" />
-    <None Include="wwwroot\lib\minuinet\boot.js" />
     <None Include="wwwroot\lib\minuinet\customCtrl.js" />
     <None Include="wwwroot\lib\minuinet\flowBusLeft.js" />
     <None Include="wwwroot\lib\minuinet\miniuiExt.js" />

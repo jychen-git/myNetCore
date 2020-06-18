@@ -2061,5 +2061,73 @@ function moveDown(gridId) {
         }
         //
 
+        // GetList
+
+        #region String替换
+
+        /// <summary>
+        /// 替换{}内容为当前地址栏参数或当前人信息
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public string ReplaceDicString(string sql, DataRow row = null, Dictionary<string, object> dic = null,
+            Dictionary<string, DataTable> dtDic = null, bool validateCurrentUser = true)
+        {
+            if (string.IsNullOrEmpty(sql))
+                return sql;
+            //TODO 自动替换人员用户信息
+            Regex reg = new Regex("\\{[0-9a-zA-Z_\\.]*\\}");
+            string result = reg.Replace(sql, (Match m) =>
+            {
+                string value = m.Value.Trim('{', '}');
+
+                if (dtDic != null && dtDic.Count > 0)
+                {
+                    var arr = value.Split('.');
+                    if (arr.Length == 1)
+                    {
+                        if (dtDic.ContainsKey(value)) //默认值为整个表
+                            return JsonHelper.ToJson(dtDic[value]);
+                    }
+                    else if (arr.Length == 2) //默认子编号名.字段名
+                    {
+                        if (dtDic.ContainsKey(arr[0]))
+                        {
+                            var dt = dtDic[arr[0]];
+                            if (dt.Rows.Count > 0 && dt.Columns.Contains(arr[1]))
+                            {
+                                return dt.Rows[0][arr[1]].ToString();
+                            }
+                        }
+                    }
+                }
+                if (row != null && row.Table.Columns.Contains(value))
+                    return row[value].ToString();
+                if (dic != null && dic.ContainsKey(value))
+                    return dic.GetValue(value);
+
+                switch (value)
+                {
+                    case "CurrentTime":
+                        return DateTime.Now.ToString();
+                    case "CurrentDate":
+                        return DateTime.Now.Date.ToString("yyyy-MM-dd");
+                    case "CurrentYear":
+                        return DateTime.Now.Year.ToString();
+                    case "CurrentMonth":
+                        return DateTime.Now.Month.ToString();
+                    case "CurrentQuarter":
+                        return ((DateTime.Now.Month + 2) / 3).ToString();
+                    default:
+                        return "";
+                }
+            });
+
+            return result;
+        }
+        #endregion
+
+        //
     }
 }

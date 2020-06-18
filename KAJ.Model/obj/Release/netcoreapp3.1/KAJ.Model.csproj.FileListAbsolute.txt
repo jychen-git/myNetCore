@@ -1,0 +1,9 @@
+F:\0_Study\1_Core\KAJ.Model\bin\Release\netcoreapp3.1\KAJ.Model.deps.json
+F:\0_Study\1_Core\KAJ.Model\bin\Release\netcoreapp3.1\KAJ.Model.dll
+F:\0_Study\1_Core\KAJ.Model\bin\Release\netcoreapp3.1\KAJ.Model.pdb
+F:\0_Study\1_Core\KAJ.Model\obj\Release\netcoreapp3.1\KAJ.Model.csprojAssemblyReference.cache
+F:\0_Study\1_Core\KAJ.Model\obj\Release\netcoreapp3.1\KAJ.Model.csproj.CoreCompileInputs.cache
+F:\0_Study\1_Core\KAJ.Model\obj\Release\netcoreapp3.1\KAJ.Model.AssemblyInfoInputs.cache
+F:\0_Study\1_Core\KAJ.Model\obj\Release\netcoreapp3.1\KAJ.Model.AssemblyInfo.cs
+F:\0_Study\1_Core\KAJ.Model\obj\Release\netcoreapp3.1\KAJ.Model.dll
+F:\0_Study\1_Core\KAJ.Model\obj\Release\netcoreapp3.1\KAJ.Model.pdb

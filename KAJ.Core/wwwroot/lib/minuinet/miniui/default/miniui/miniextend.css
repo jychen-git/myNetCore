@@ -1,0 +1,1369 @@
+﻿
+.showLoadingOuter {
+    width: 604px;
+    padding: 2em;
+    margin: 0 auto;
+}
+
+.showLoadingHeader {
+    font-size: 1.5em;
+    color: rgba(255,255,255,1);
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 25px;
+    text-shadow: #090909 3px 3px 3px;
+}
+
+.mini-mask-background {
+    background: #fff !important;
+}
+
+.showLoadingDivOutter {
+    position: relative;
+    overflow: hidden;
+    height: 35px;
+    padding-right: 2px;
+    background-color: #abb2bc;
+    border-radius: 35px;
+    -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px #FFF;
+    -moz-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px #FFF;
+    box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px #FFF;
+}
+
+.showLoadingDivInner {
+    width: 0px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    height: 35px;
+    -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    border-radius: 35px;
+    -webkit-background-size: 44px 44px;
+    background-color: #22722f;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #dbf383, inset 0px -1px 1px #58c43a;
+    -moz-box-shadow: inset 0px 1px 0px 0px #dbf383, inset 0px -1px 1px #58c43a;
+    box-shadow: inset 0px 1px 0px 0px #dbf383, inset 0px -1px 1px #58c43a;
+    border: 1px solid #4c8932;
+    -webkit-animation: animate-stripes 2s linear infinite;
+    -webkit-background-size: 45px 45px;
+    -moz-background-size: 45px 45px;
+    background-size: 45px 45px;
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    -webkit-animation: animate-stripes 3s linear infinite;
+    -moz-animation: animate-stripes 3s linear infinite;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 1px gray solid;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+}
+
+form {
+    margin: 0px;
+    display: inline;
+}
+
+.mini-modal {
+    filter: alpha(opacity=60) !important;
+    opacity: 0.6;
+}
+
+/*--------------------------只读样式begin--------------------------------------*/
+.asLabel .mini-textbox-border, .asLabel .mini-textbox-input, .asLabel .mini-buttonedit-border, .asLabel .mini-buttonedit-input, .asLabel .mini-textboxlist-border, .asLabel .mini-checkboxlist-item, .asLabel .mini-radiobuttonlist-item {
+    background: none;
+    cursor: default;
+    background-color: #e8e9ec;
+}
+
+.asLabel .mini-buttonedit-button, .asLabel .mini-textboxlist-close {
+    display: none;
+}
+
+.asLabel .mini-textboxlist-item {
+    padding-right: 8px;
+}
+
+.asLabel .mini-placeholder-label {
+    display: none;
+}
+
+.redFont .mini-textbox-input, .redFont .mini-buttonedit-input {
+    color: red;
+}
+/*--------------------------只读样式end--------------------------------------*/
+
+/**----------------------form布局begin----------------------*/
+form .basediv {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+/*----------------------form布局End----------------------*/
+
+/*----------------------form内容样式begin----------------------*/
+.formDiv {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    .formDiv fieldset legend {
+        font-weight: bold;
+    }
+
+    .formDiv fieldset table {
+        width: 100%;
+        border: 0px;
+        padding: 0px;
+        table-layout: fixed;
+    }
+
+.hideRow {
+    height: 1px;
+}
+
+#btnDiv {
+    border-bottom-color: #d3d3d3;
+}
+
+    #btnDiv table {
+        width: 100%;
+        padding: 0px;
+    }
+
+    #btnDiv #btnRight {
+        text-align: right;
+        white-space: nowrap;
+    }
+/*----------------------form内容样式End----------------------*/
+
+/*----------------------查询框样式begin----------------------*/
+.queryDiv table {
+    width: 100%;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.queryDiv div {
+    text-align: center;
+    padding: 10px;
+}
+
+/*----------------------查询框样式End----------------------*/
+
+/*-------grid row button----------------------------------*/
+.icon-row-remove, .icon-row-view, .icon-row-delete, .icon-row-goto, .icon-row-download, .icon-row-upload, .icon-row-add, .icon-row-edit, .icon-row-ok, .icon-row-cancel, .icon-row-reload, .icon-row-important, .icon-row-normal, .icon-row-lower, .icon-row-silverbell, .icon-row-yellowbell, .icon-row-urgency, .icon-row-urgency-not, .icon-row-flowstart, .icon-row-flowtrace, .icon-row-undo, .icon-row-save {
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    margin: auto;
+    background: url(./icons/noimage.gif) no-repeat;
+    text-align: center;
+    display: block;
+    cursor: hand;
+}
+
+.icon-row-remove {
+    background: url(./icons/remove.gif) no-repeat;
+}
+
+.icon-row-delete {
+    background: url(./icons/delete.gif) no-repeat;
+}
+
+.icon-row-view {
+    background: url(./icons/zoomin.gif) no-repeat;
+}
+
+.icon-row-goto {
+    background: url(./icons/goto.gif) no-repeat;
+}
+
+.icon-row-download {
+    background: url(./icons/download.gif) no-repeat;
+}
+
+.icon-row-upload {
+    background: url(./icons/upload.gif) no-repeat;
+}
+
+.icon-row-add {
+    background: url(./icons/add.gif) no-repeat;
+}
+
+.icon-row-edit {
+    background: url(./icons/edit.gif) no-repeat;
+}
+
+.icon-row-ok {
+    background: url(./icons/ok.png) no-repeat;
+}
+
+.icon-row-cancel {
+    background: url(./icons/cancel.gif) no-repeat;
+}
+
+.icon-row-reload {
+    background: url(./icons/reload.png) no-repeat;
+}
+
+.icon-row-important {
+    background: url(./icons/warning_high.png) no-repeat;
+}
+
+.icon-row-normal {
+    background: url(./icons/warning_normal.png) no-repeat;
+}
+
+.icon-row-lower {
+    background: url(./icons/warning_lower.png) no-repeat;
+}
+
+.icon-row-silverbell {
+    background: url(./icons/bell_silver.png) no-repeat;
+}
+
+.icon-row-yellowbell {
+    background: url(./icons/bell_yellow.png) no-repeat;
+}
+
+.icon-row-urgency {
+    background: url(./icons/important.png) no-repeat;
+}
+
+.icon-row-urgency-not {
+    background: url(./icons/important_not.png) no-repeat;
+}
+
+.icon-row-flowstart {
+    background: url(./icons/flowstart.gif) no-repeat;
+}
+
+.icon-row-flowtrace {
+    background: url(./icons/flowtrace.gif) no-repeat;
+}
+
+.icon-row-save {
+    background: url(./icons/save.gif) no-repeat;
+}
+
+.icon-row-undo {
+    background: url(./icons/undo.gif) no-repeat;
+}
+
+.icon-row-flowtrace {
+    background: url(./icons/flowtrace.gif) no-repeat;
+}
+/*-------grid row button end----------------------------------*/
+
+.mini-menu .mini-menuitem-checked .mini-menuitem-icon {
+    padding-right: 15px;
+    background: url(images/menu/checked.gif) no-repeat 50% 6px;
+}
+/*-------组织机构扩展图标,大小写敏感 begin-------------------------------------*/
+
+.GroupCompany:before {
+    content: "\f1ad";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Post:before {
+    content: "\f007";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.ManufactureDept:before {
+    content: "\f013";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Company:before {
+    content: "\f125";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Org:before {
+    content: "\f1b3";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Dept:before {
+    content: "\f1b3";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.SubDept:before {
+    content: "\f1e1";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+
+/*-------组织机构扩展图标,大小写敏感 End-------------------------------------*/
+
+/*-------项目管理扩展图标,大小写敏感 begin-------------------------------------*/
+
+.Project:before {
+    content: "\f19c";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Root:before {
+    content: "\f19c";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.SubProject:before {
+    content: "\f1b3";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Device:before {
+    content: "\f1b3";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Area:before {
+    content: "\f009";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Entity:before {
+    content: "\f1b2";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Design:before {
+    content: "\f1b2";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Phase:before {
+    content: "\f009";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.MileStone:before {
+    content: "\f024";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Engineering:before {
+    content: "\f085";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Module:before {
+    content: "\f1b2";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.SubWork:before {
+    content: "\f1ad";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Major:before {
+    content: "\f1ea";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.TaskWork:before {
+    content: "\f0ae";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.WorkTask:before {
+    content: "\f0ae";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.ProcurementTask:before {
+    content: "\f0ae";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.CooperationTask:before {
+    content: "\f03c";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.DesignTask:before {
+    content: "\f0ae";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Work:before {
+    content: "\f0ae";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.CooperationPackage:before {
+    content: "\f03c";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.CBS:before {
+    content: "\f0d6";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Subject:before {
+    content: "\f0d6";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Package:before {
+    content: "\f009";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.PackageType:before {
+    content: "\f009";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Detail:before {
+    content: "\f03a";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Other:before {
+    content: "\f009";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Product:before {
+    content: "\f15b";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Process:before {
+    content: "\f15b";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.SubProduct:before {
+    content: "\f1c1";
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.Contract:before {
+    content: "\f02d";
+    padding-right: 5px;
+    font-size: 14px;
+}
+/*
+.Project {
+    background: url(icons/project.gif) no-repeat;
+}
+
+.SubProject {
+    background: url(icons/subproject.gif) no-repeat;
+}
+
+.Major {
+    background: url(icons/major.gif) no-repeat;
+}
+
+.Package {
+    background: url(icons/Package.gif) no-repeat;
+}
+
+.Electron {
+    background: url(icons/electron.png) no-repeat;
+}
+
+.ProjectData {
+    background: url(icons/projectdata.png) no-repeat;
+}
+
+.Volume {
+    background: url(icons/volume.png) no-repeat;
+}*/
+/*------项目管理扩展图标end--------------------------------------------------*/
+
+/*------icon 扩展------------------------------*/
+.icon-copy {
+    background: url(icons/copy.gif) no-repeat;
+}
+
+.icon-set {
+    background: url(icons/set.gif) no-repeat;
+}
+
+.icon-import {
+    background: url(icons/addfolder.gif) no-repeat;
+}
+
+.icon-user {
+    background: url(icons/major.gif) no-repeat;
+}
+
+.icon-excel {
+    background: url(icons/excel.gif) no-repeat;
+}
+
+.icon-excel-import {
+    background: url(icons/excel-down.png) no-repeat;
+}
+
+.icon-excel-export {
+    background: url(icons/excel-up.png) no-repeat;
+}
+
+.icon-excel-down {
+    background: url(icons/excel-down.png) no-repeat;
+}
+
+.icon-excel-up {
+    background: url(icons/excel-up.png) no-repeat;
+}
+
+.icon-word {
+    background: url(icons/word.gif) no-repeat;
+}
+
+.icon-pdf {
+    background: url(icons/pdf.png) no-repeat;
+}
+
+.icon-flag-red {
+    background: url(icons/flag_red.gif) no-repeat;
+}
+
+.icon-flag-orange {
+    background: url(icons/flag_orange.gif) no-repeat;
+}
+
+.icon-flag-green {
+    background: url(icons/flag_green.gif) no-repeat;
+}
+
+.icon-flag-blue {
+    background: url(icons/flag_blue.gif) no-repeat;
+}
+
+.icon-register {
+    background: url(icons/register.png) no-repeat;
+}
+
+.icon-taohong {
+    background: url(icons/taohong.png) no-repeat;
+}
+
+.icon-stamp {
+    background: url(icons/stamp.png) no-repeat;
+}
+
+.icon-version {
+    background: url(icons/version.png) no-repeat;
+}
+
+.icon-draft {
+    background: url(icons/draft.png) no-repeat;
+}
+
+/*-------扩展按钮样式开始----------------------------------*/
+
+.icon-clear {
+    background: url(./icons/clear.gif) no-repeat;
+}
+
+.icon-left {
+    background: url(./icons/left.gif) no-repeat;
+}
+
+.icon-right {
+    background: url(./icons/right.gif) no-repeat;
+}
+
+.icon-up {
+    background: url(./icons/up.gif) no-repeat;
+}
+
+.icon-down {
+    background: url(./icons/down.gif) no-repeat;
+}
+
+.icon-top {
+    background: url(./icons/top.gif) no-repeat;
+}
+
+.icon-bottom {
+    background: url(./icons/bottom.gif) no-repeat;
+}
+
+.icon-setting {
+    background: url(./icons/setting.gif) no-repeat;
+}
+
+.icon-setting2 {
+    background: url(./icons/setting2.gif) no-repeat;
+}
+
+.icon-refer {
+    background: url(./icons/refer.gif) no-repeat;
+}
+
+.icon-discard {
+    background: url(./icons/discard.gif) no-repeat;
+}
+
+.icon-item {
+    background: url(./icons/item.gif) no-repeat;
+}
+
+.icon-extend-download {
+    background: url(./icons/download.png) no-repeat;
+}
+
+.icon-extend-upload {
+    background: url(./icons/upload.png) no-repeat;
+}
+
+.icon-extend-filedelete {
+    background: url(./icons/file_delete.png) no-repeat;
+}
+
+.icon-extend-trash {
+    background: url(./icons/trash.png) no-repeat;
+}
+
+.icon-extend-checked {
+    background: url(./icons/checked.png) no-repeat;
+}
+
+.icon-extend-edit {
+    background: url(./icons/edit.gif) no-repeat;
+}
+
+.icon-extend-flowstart {
+    background: url(./icons/flowstart.gif) no-repeat;
+}
+
+.icon-extend-flowtrace {
+    background: url(./icons/flowtrace.gif) no-repeat;
+}
+
+.icon-extend-preview {
+    background: url(./icons/preview.png) no-repeat;
+}
+
+.icon-auditing {
+    background: url(./icons/auditing.gif) no-repeat;
+}
+
+.icon-auditing_pass {
+    background: url(./icons/auditing_pass.gif) no-repeat;
+}
+
+.icon-auditing_fall {
+    background: url(./icons/auditing_fall.gif) no-repeat;
+}
+
+.icon-org {
+    background: url(./icons/org.gif) no-repeat;
+}
+
+.icon-dept {
+    background: url(./icons/dept.gif) no-repeat;
+}
+
+.icon-readmail {
+    background: url(./icons/readMail.gif) no-repeat;
+}
+
+.icon-unreadmail {
+    background: url(./icons/unReadMail.gif) no-repeat;
+}
+
+.icon-cutover {
+    background: url(./icons/cutover.png) no-repeat;
+}
+
+.icon-linkform {
+    background: url(./icons/link_form.png) no-repeat;
+}
+
+.icon-noimage {
+    background: url(./icons/noimage.gif) no-repeat;
+}
+
+.searchbox .mini-buttonedit-icon {
+    background-image: none;
+    font: normal normal normal 12px/14px FontAwesome, "微软雅黑";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+    .searchbox .mini-buttonedit-icon:before {
+        content: "\f002";
+    }
+
+/*-------扩展按钮样式结束----------------------------------*/
+
+/*------icon 扩展------------------------------*/
+
+.mini-splitter .mini-datagrid, .mini-splitter .mini-treegrid {
+    border-width: 0px;
+}
+
+/*-------消除界面多边线的样式----------------------------------*/
+
+.gw-grid-toolbar {
+    border-top: 0px;
+    border-bottom: 0px;
+    padding: 0px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.gw-form-toolbar {
+    border-width: 0px 0px 1px 0px;
+    padding: 0px;
+    border-bottom-color: #d3d3d3;
+}
+
+    .gw-grid-toolbar table, .gw-form-toolbar table {
+        width: 100%;
+        padding: 0px;
+    }
+
+.gw-toolbar-right {
+    text-align: right;
+    white-space: nowrap;
+    padding-right: 5px;
+}
+
+.gw-searchbox {
+    width: 200px;
+}
+
+    .gw-searchbox .mini-buttonedit-icon {
+        background: url(./icons/search.gif) no-repeat 50% 50%;
+    }
+
+.gw-form {
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+    .gw-form table {
+        width: 100%;
+        border: 0px;
+        padding: 0px;
+    }
+
+    .gw-form td {
+        text-align: right;
+    }
+
+    .gw-form .mini-checkcolumn {
+        text-align: center !important;
+    }
+
+    .gw-form .mini-panel {
+        margin-bottom: 10px;
+    }
+
+    .gw-form .mini-grid {
+        margin-bottom: 0px;
+    }
+
+    .gw-form .mini-grid-border {
+        border-width: 0px;
+    }
+
+    .gw-form fieldset {
+        border: 1px solid #999999;
+        padding: 4px 7px 7px 7px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+        .gw-form fieldset legend {
+            font-weight: bold;
+        }
+
+        .gw-form fieldset .mini-grid-border {
+            border-width: 1px;
+        }
+
+.mini-toolbar .gw-grid-title {
+    float: left;
+    min-width: 16px;
+    height: 16px;
+    overflow: hidden;
+    vertical-align: middle;
+    padding-left: 18px;
+    line-height: 16px;
+}
+
+.mini-tab {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.mini-required.mini-radiobuttonlist:not(.mini-readonly), .mini-required.mini-checkboxlist:not(.mini-readonly) {
+    background: #FFFFE6;
+    border: solid 1px #a5acb5 !important;
+    min-height: 21px;
+}
+
+.mini-required.mini-radiobuttonlist > table, .mini-required.mini-checkboxlist > table {
+    margin: 1px;
+}
+
+.mini-required.mini-radiobuttonlist input {
+    margin-top: 3px;
+}
+/*-------自定义控件css----------------------------------*/
+.mini-required .mini-splitter-border {
+    background: none repeat scroll 0 0 #FFFFE6;
+}
+
+.mini-multifile-readonly .mini-splitter-border {
+    background: none repeat scroll 0 0 #F0F0F0;
+}
+
+.mini-multifile-disabled .mini-splitter-border {
+    background: none repeat scroll 0 0 #F0F0F0;
+}
+
+.mini-singlefile {
+    display: inline-block;
+    height: 21px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+}
+
+.mini-singlefile-border {
+    border: 1px solid #B5B8C8;
+    display: block;
+    height: 19px;
+    overflow: hidden;
+    padding-left: 1px;
+    padding-right: 35px;
+    position: relative;
+    width: auto;
+}
+
+.mini-required .mini-singlefile-border {
+    background: none repeat scroll 0 0 #FFFFE6;
+}
+
+body .mini-singlefile-readonly .mini-singlefile-border, div .mini-singlefile-readonly .mini-singlefile-input {
+    background: none repeat scroll 0 0 #F0F0F0;
+}
+
+body .mini-singlefile-disabled .mini-singlefile-border, div .mini-singlefile-disabled .mini-singlefile-input {
+    background: none repeat scroll 0 0 #F0F0F0;
+}
+
+.mini-singlefile-buttons {
+    clear: both;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.mini-singlefile-input {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: hand;
+    text-decoration: underline;
+    float: left;
+    font-family: Verdana;
+    font-size: 9pt;
+    height: 19px;
+    line-height: 19px;
+    margin: 0;
+    outline: medium none;
+    padding: 0;
+    width: 92%;
+    z-index: 1;
+    overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.mini-singlefile-button {
+    border: 1px solid #B5B8C8;
+    padding: 0;
+}
+
+.mini-singlefile-button, .mini-singlefile-remove {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin-right: 1px;
+    margin-top: 1px;
+    overflow: hidden;
+    padding: 1px;
+    vertical-align: top;
+    z-index: 10;
+}
+
+.mini-singlefile-remove {
+    background: url("/CommonWebResource/RelateResource/image/customctrl/singlefile_delete.gif") no-repeat scroll 50% 50% transparent;
+    display: inline-block;
+}
+
+.mini-singlefile-viewer {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin-right: 1px;
+    margin-top: 1px;
+    overflow: hidden;
+    padding: 1px;
+    vertical-align: top;
+    z-index: 10;
+    margin-top: 8px;
+    background: url("/CommonWebResource/RelateResource/image/customctrl/singlefile_viewer.gif") no-repeat scroll 50% 50% transparent;
+    display: inline-block;
+}
+
+.mini-singlefile-button-hover, .mini-singlefile-hover .mini-singlefile-button {
+    border: 1px solid #ababab;
+    padding: 0;
+    background: #dde6fe url(/CommonWebResource/Theme/Default/MiniUI/images/button/hover.png) repeat-x 0 0;
+}
+
+.mini-singlefile-upload {
+    background: url(/CommonWebResource/Theme/Default/MiniUI/icons/upload.png) no-repeat scroll 45% 50% transparent;
+    display: inline;
+    height: 16px;
+    overflow: hidden;
+    width: 16px;
+}
+
+
+.mini-multifile-upload {
+    background: url(/CommonWebResource/Theme/Default/MiniUI/icons/upload.png) no-repeat scroll 45% 50% transparent;
+    display: block;
+    height: 16px;
+    overflow: hidden;
+    width: 16px;
+}
+
+
+.userselectbox .mini-buttonedit-icon {
+    background: url("/CommonWebResource/RelateResource/image/customctrl/user.png") no-repeat 50% 50%;
+}
+
+
+.mini-word {
+    display: inline-block;
+    height: 21px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+}
+
+.mini-word-border {
+    display: block;
+    height: 19px;
+    overflow: hidden;
+    padding-left: 1px;
+    position: relative;
+    background: white url(/CommonWebResource/Theme/Default/MiniUI/images/buttonedit/text-bg.gif) repeat-x 0px top;
+}
+
+.mini-word-error {
+    background: url("/CommonWebResource/Theme/Default/MiniUI/images/panel/error.gif") no-repeat scroll 50% 50% transparent;
+    display: inline-block;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin-right: 1px;
+    overflow: hidden;
+    padding: 1px;
+    vertical-align: top;
+    z-index: 10;
+}
+
+
+
+
+
+
+/*-------补充自定义icon----------------------------------*/
+.icon-adduser {
+    background: url(icons/adduser.gif) no-repeat;
+}
+
+.icon-auditing {
+    background: url(icons/auditing.gif) no-repeat;
+}
+
+.icon-auditing_fall {
+    background: url(icons/auditing_fall.gif) no-repeat;
+}
+
+.icon-auditing_pass {
+    background: url(icons/auditing_pass.gif) no-repeat;
+}
+
+.icon-bottom {
+    background: url(icons/bottom.gif) no-repeat;
+}
+
+.icon-clear {
+    background: url(icons/clear.gif) no-repeat;
+}
+
+.icon-copy {
+    background: url(icons/copy.gif) no-repeat;
+}
+
+.icon-dept {
+    background: url(icons/dept.gif) no-repeat;
+}
+
+.icon-discard {
+    background: url(icons/discard.gif) no-repeat;
+}
+
+.icon-down {
+    background: url(icons/down.gif) no-repeat;
+}
+
+.icon-excel {
+    background: url(icons/excel.gif) no-repeat;
+}
+
+.icon-file_delete {
+    background: url(icons/file_delete.png) no-repeat;
+}
+
+.icon-flag_blue {
+    background: url(icons/flag_blue.gif) no-repeat;
+}
+
+.icon-flag_green {
+    background: url(icons/flag_green.gif) no-repeat;
+}
+
+.icon-flag_orange {
+    background: url(icons/flag_orange.gif) no-repeat;
+}
+
+.icon-flag_red {
+    background: url(icons/flag_red.gif) no-repeat;
+}
+
+.icon-flowstart {
+    background: url(icons/flowstart.gif) no-repeat;
+}
+
+.icon-flowtrace {
+    background: url(icons/flowtrace.gif) no-repeat;
+}
+
+.icon-item {
+    background: url(icons/item.gif) no-repeat;
+}
+
+.icon-left {
+    background: url(icons/left.gif) no-repeat;
+}
+
+.icon-major {
+    background: url(icons/major.gif) no-repeat;
+}
+
+.icon-image {
+    background: url(icons/noimage.gif) no-repeat;
+}
+
+.icon-open {
+    background: url(icons/open.gif) no-repeat;
+}
+
+.icon-org {
+    background: url(icons/org.gif) no-repeat;
+}
+
+.icon-package {
+    background: url(icons/package.gif) no-repeat;
+}
+
+.icon-preview {
+    background: url(icons/preview.gif) no-repeat;
+}
+
+.icon-project {
+    background: url(icons/project.gif) no-repeat;
+}
+
+.icon-refer {
+    background: url(icons/refer.gif) no-repeat;
+}
+
+.icon-right {
+    background: url(icons/right.gif) no-repeat;
+}
+
+.icon-set {
+    background: url(icons/set.gif) no-repeat;
+}
+
+.icon-setting {
+    background: url(icons/setting.gif) no-repeat;
+}
+
+.icon-tool {
+    background: url(icons/setting2.gif) no-repeat;
+}
+
+.icon-subproject {
+    background: url(icons/subproject.gif) no-repeat;
+}
+
+.icon-top {
+    background: url(icons/top.gif) no-repeat;
+}
+
+.icon-trash {
+    background: url(icons/trash.png) no-repeat;
+}
+
+.icon-up {
+    background: url(icons/up.gif) no-repeat;
+}
+
+.icon-warning {
+    background: url(icons/warning.png) no-repeat;
+}
+
+.icon-word {
+    background: url(icons/word.gif) no-repeat;
+}
+
+.icon-pdf {
+    background: url(icons/pdf.png) no-repeat;
+}
+
+.icon-preview {
+    background: url(icons/preview.png) no-repeat;
+}
+
+.icon-upversion {
+    background: url(icons/goto.gif) no-repeat;
+}
+
+.icon-important {
+    background: url(icons/important.png) no-repeat;
+}
+
+.icon-bind {
+    background: url(icons/bind.png) no-repeat;
+}
+
+.icon-system {
+    background: url(icons/system.png) no-repeat;
+}
+
+.icon-database {
+    background: url(icons/database.png) no-repeat;
+}
+
+.icon-module {
+    background: url(icons/module.png) no-repeat;
+}
+
+#comment ul {
+    font: 12px verdana, arial, sans-serif;
+    font-family: 'Microsoft YaHei';
+    background-color: #dde4ec;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 0px;
+    margin: 3px 0;
+}
+
+#comment li:not(.flow-comment) {
+    list-style: none;
+    float: left;
+}
+
+#comment li a {
+    display: block; /* 将链接设为块级元素 */
+    text-align: center; /* 居中对齐文字 */
+    color: #fff; /* 设置文字颜色 */
+    text-decoration: none; /* 去掉下划线 */
+}
+
+.flow-No {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-right: 12px;
+    margin-top: 2px;
+    color: #3c8dbc;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    background-color: #fff;
+}
+
+    .flow-No span {
+        margin-left: 8px;
+    }
+
+.flow-stepName {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    margin-right: 16px;
+}
+
+.flow-execRoutingName {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 16px;
+    margin-right: 16px;
+    color: #000;
+    font-weight: bold;
+}
+
+.flow-comment {
+    list-style: none;
+    float: right;
+    margin-right: 18px;
+    color: #3c8dbc;
+    cursor: pointer;
+}
+
+.flow-execComment {
+    padding: 8px 0;
+    padding-left: 40px;
+    min-height: 5px;
+}
+
+.flow-reply {
+    font: 12px verdana, arial, sans-serif;
+    font-family: 'Microsoft YaHei';
+    background-color: #dde4ec;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.flow-replyComment {
+    padding-left: 40px;
+}
+
+.flow-replyName {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    margin-right: 16px;
+    padding-left: 15px;
+}
+
+.flow-addCss {
+    float: left;
+    width: 176px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: bottom;
+}
+
+.flow-addImgCss {
+    float: left;
+    width: 21px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: bottom;
+}
+
+
+/*无滚动条修正*/
+.mini-layout-region-body {
+    overflow-y: auto;
+}
+
+/*树列表超链接样式*/
+.mini-tree-nodetext a {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+/*ueditor表单样式修正为老版兼容*/
+.ke-zeroborder { width: 93% !important;
+}
+.ke-zeroborder caption {
+    margin:0px -60px 10px -60px !important;
+}
+

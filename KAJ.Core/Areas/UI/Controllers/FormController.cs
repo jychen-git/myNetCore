@@ -10,5 +10,9 @@ namespace KAJ.Core.Areas.UI.Controllers
     [Area("UI")]
     public class FormController : BaseAutoFormController
     {
+        public IActionResult IndexForm()
+        {
+            return View();
+        }
     }
 }

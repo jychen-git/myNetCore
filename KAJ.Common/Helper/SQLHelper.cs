@@ -1,4 +1,5 @@
 ﻿using KAJ.Common.DB;
+using KAJ.Common.Useful;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -215,6 +216,8 @@ INSERT INTO [{2}]
         }
 
         #endregion
+
+
 
         #region 私有方法
 

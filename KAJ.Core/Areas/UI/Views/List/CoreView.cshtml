@@ -136,16 +136,16 @@
     }
 
     var _listFilter = {};
-    function gridFilter(e, querymode,dataType,enumkey) {
+    function gridFilter(e, querymode, dataType, enumkey) {
         var _mode = "";
         var _value = e.value;
 
         //校验输入格式
-        if (dataType == "N" && _value!="" && !isNumber(_value)) {
+        if (dataType == "N" && _value != "" && !isNumber(_value)) {
             alert("请输入数字！");
             return;
         }
-        if (dataType == "D" && _value!="" && !isDate(_value)) {
+        if (dataType == "D" && _value != "" && !isDate(_value)) {
             alert("请输入正确的日期格式，如2018-1-31");
             return;
         }
@@ -245,8 +245,8 @@
         var day = parseInt(array[2]);
         var date = new Date(year, month, day);
         return (date.getFullYear() == year &&
-                date.getMonth() == month &&
-                date.getDate() == day);
+            date.getMonth() == month &&
+            date.getDate() == day);
     }
 
     var headerDefault = [{ text: '查询空', value: 'isempty' }];

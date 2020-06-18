@@ -1,13 +1,15 @@
 ﻿using KAJ.Common.Helper;
+using KAJ.Common.Useful;
 using KAJ.CoreAuto.BaseFormula;
-using KAJ.IServices;
 using KAJ.Model.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace KAJ.CoreAuto.BaseAuto
 {
@@ -106,34 +108,32 @@ namespace KAJ.CoreAuto.BaseAuto
         }
         #endregion
 
-        public JsonResult GetList()
+        public JsonResult GetListAAA()
         {
-            var aa = Request;
-            string tmplCode = aa.Query["tmplCode"].ToString();
-            string id = aa.Query["ID"].ToString();
-            var bb = HttpContext;
-            var cc = HttpContext.Request;
-            return Json("");
+            string sql = "SELECT  * FROM S_UI_List";
+            var list = sqlHelper.ExecuteList<S_UI_List>(sql);
+
+            return Json(list);
         }
 
-        /*
-         * 暂时
-        public virtual JsonResult GetList(string tmplCode, QueryBuilder qb)
+
+        public virtual JsonResult GetList(QueryBuilder qb)
         #region
-
         {
-            var listDef = entities.Set<S_UI_List>().SingleOrDefault(c => c.Code == tmplCode);
-            SQLHelper sqlHeler = SQLHelper.CreateSqlHelper(listDef.ConnName);
+            string tmplCode = Request.Query["tmplCode"].ToString();
+            string sqlList = "SELECT  * FROM S_UI_List";
+            List<S_UI_List> uiLists = sqlHelper.ExecuteList<S_UI_List>(sqlList).Where(c => c.Code == tmplCode).ToList();
+            S_UI_List listDef = uiLists.FirstOrDefault();
 
-            UIFO uiFO = FormulaHelper.CreateFO<UIFO>();
+            UIBuilder uiFO = new UIBuilder();
 
             var lefSettings = JsonHelper.ToObject(listDef.LayoutGrid);
             if (lefSettings.GetValue("isTreeGrid") == true.ToString().ToLower() &&
-                this.Request["IsLoadChildren"] == true.ToString().ToLower())
+                Request.Query["IsLoadChildren"].ToString() == true.ToString().ToLower())
             {
                 //异步加载树列表
-                var node = String.IsNullOrEmpty(this.Request["NodeInfo"]) ? new Dictionary<string, object>() :
-                    JsonHelper.ToObject<Dictionary<string, object>>(this.Request["NodeInfo"]);
+                var node = String.IsNullOrEmpty(Request.Query["NodeInfo"].ToString()) ? new Dictionary<string, object>() :
+                    JsonHelper.ToObject<Dictionary<string, object>>(Request.Query["NodeInfo"].ToString());
                 var defaultValues = JsonHelper.ToList(listDef.DefaultValueSettings);
                 var nodeTypeField = String.IsNullOrEmpty(lefSettings.GetValue("NodeTypeField")) ? "NodeType" : lefSettings.GetValue("NodeTypeField");
                 var nodeType = String.IsNullOrEmpty(node.GetValue(nodeTypeField)) ? "Root" : node.GetValue(nodeTypeField);
@@ -154,7 +154,7 @@ namespace KAJ.CoreAuto.BaseAuto
                 var db = SQLHelper.CreateSqlHelper(dataSource.GetValue("ConnName"));
                 var sourceSQL = dataSource.GetValue("SQL");
                 sourceSQL = uiFO.ReplaceDicString(sourceSQL, null, node);
-                var children = db.ExecuteDataTable(sourceSQL, new SearchCondition());
+                var children = db.ExecuteDataTable(sourceSQL);
                 return Json(children);
             }
             else
@@ -162,7 +162,7 @@ namespace KAJ.CoreAuto.BaseAuto
                 string sql = listDef.SQL;
                 #region TAB查询
                 //解决tab查询需要在sql中间的问题
-                var tabData = Request["queryTabData"];
+                var tabData = Request.Query["queryTabData"].ToString();
                 var fields = JsonHelper.ToList(listDef.LayoutField);
                 var tabEmbeddedFields = new Dictionary<string, string>();
                 foreach (var field in fields)
@@ -196,9 +196,7 @@ namespace KAJ.CoreAuto.BaseAuto
                             enumList = JsonHelper.ToList(enumKey);
                         else
                         {
-                            var enumServcie = FormulaHelper.GetService<IEnumService>();
-                            var dataTable = enumServcie.GetEnumTable(enumKey);
-                            enumList = FormulaHelper.DataTableToListDic(dataTable);
+                            //TODO  自动加载枚举
                         }
                         var value = String.Join(",", enumList.Select(c => c["value"].ToString()).ToList());
                         if (value.Contains(","))
@@ -213,24 +211,25 @@ namespace KAJ.CoreAuto.BaseAuto
                 sql = uiFO.ReplaceString(sql, null, tabEmbeddedFields);
 
                 #region 地址栏过滤
-                DataTable dtTmpl = sqlHeler.ExecuteDataTable(string.Format("SELECT * FROM ({0}) T WHERE 1=2", sql));
-                foreach (string key in Request.QueryString.Keys)
+                DataTable dtTmpl = sqlHelper.ExecuteDataTable(string.Format("SELECT * FROM ({0}) T WHERE 1=2", sql));
+                foreach (var query in Request.Query.ToList())
                 {
-                    if (string.IsNullOrEmpty(key))
+                    //TODO 地址栏过滤
+                    if (string.IsNullOrEmpty(query.Key))
                         continue;
-                    if ("ID,FullID,FULLID,TmplCode,IsPreView,_winid,_t".Split(',').Contains(key) || key.StartsWith("$"))
+                    if ("ID,FullID,FULLID,TmplCode,IsPreView,_winid,_t".Split(',').Contains(query.Key) || query.Key.StartsWith("$"))
                         continue;
-                    if (dtTmpl.Columns.Contains(key))
-                        qb.Add(key, QueryMethod.In, Request[key]); ;
+                    if (dtTmpl.Columns.Contains(query.Key))
+                        qb.Add(query.Key, QueryMethod.In, query.Value);
                 }
                 #endregion
 
-                GridData data = null;
+                MiniData data = null;
                 if (listDef.LayoutGrid.Contains("\"showPager\":\"false\""))
                 {
                     qb.PageSize = 0;
                 }
-                data = sqlHeler.ExecuteGridData(sql, qb, listDef.OrderBy);
+                data = sqlHelper.ExecuteMiniData(sql, qb, listDef.OrderBy);
 
                 #region 计算汇总
                 StringBuilder sb = new StringBuilder();
@@ -241,10 +240,7 @@ namespace KAJ.CoreAuto.BaseAuto
                     var settings = JsonHelper.ToObject(field["Settings"].ToString());
                     if (settings.ContainsKey("Collect") == false || settings["Collect"].ToString() == "")
                         continue;
-                    if (Config.Constant.IsOracleDb)
-                        sb.AppendFormat(",{1}({0}) as {0}", field["field"], settings["Collect"]);
-                    else
-                        sb.AppendFormat(",{0}={1}({0})", field["field"], settings["Collect"]);
+                    sb.AppendFormat(",{0}={1}({0})", field["field"], settings["Collect"]);
 
                     if (settings["Collect"].ToString() == "sum")
                         data.sumData.Add(field["field"].ToString(), null);
@@ -253,21 +249,12 @@ namespace KAJ.CoreAuto.BaseAuto
                 }
                 if (sb.Length > 0)
                 {
-                    string companyAuth = "";
-                    if (System.Configuration.ConfigurationManager.AppSettings["CorpAuthEnabled"] == "True")
-                    {
-                        var dt = sqlHeler.ExecuteDataTable(string.Format("select * from ({0}) tempDt1 where 1=2", sql));
-                        if (dt.Columns.Contains("CompanyID"))
-                        {
-                            companyAuth = string.Format(" and CompanyID='{0}'", FormulaHelper.GetUserInfo().UserCompanyID);
-                        }
-                    }
-
                     string collectSql = "";
-                    SearchCondition authCnd = FormulaHelper.CreateAuthDataFilter();
-                    collectSql = string.Format("select * from ({0}) sourceTable1 where 1=1 {1} {2}", sql, authCnd.GetWhereString(false), companyAuth);
-                    collectSql = string.Format("select {2} from ({0}) sourceTable {1}", collectSql, qb.GetWhereString(), sb.ToString().Trim(','));
-                    DataTable dtCollect = sqlHeler.ExecuteDataTable(collectSql);
+                    //TODO 权限过滤
+                    // SearchCondition authCnd = FormulaHelper.CreateAuthDataFilter();
+                    // collectSql = string.Format("select * from ({0}) sourceTable1 where 1=1 {1} {2}", sql, authCnd.GetWhereString(false), companyAuth);
+                    // collectSql = string.Format("select {2} from ({0}) sourceTable {1}", collectSql, qb.GetWhereString(), sb.ToString().Trim(','));
+                    DataTable dtCollect = sqlHelper.ExecuteDataTable(collectSql);
 
                     foreach (DataColumn col in dtCollect.Columns)
                     {
@@ -308,7 +295,8 @@ namespace KAJ.CoreAuto.BaseAuto
             }
         }
         #endregion
-  
-        */
+
     }
 }
+
+

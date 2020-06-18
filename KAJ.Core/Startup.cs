@@ -7,11 +7,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace KAJ.Core
 {
@@ -34,7 +38,12 @@ namespace KAJ.Core
             services.AddSqlsugarSetup();
             // services.AddSingleton<Ixxxx,XXXX>();//接口类new实现类
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options => { //Newtonsoft.Json对DataTable进行序列化，并设置属性
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
             services.AddMvc();
         }
 
@@ -51,8 +60,6 @@ namespace KAJ.Core
             {
                 throw new Exception("Repository.dll和service.dll 丢失，因为项目解耦了，所以需要先F6编译，再F5运行，请检查 bin 文件夹，并拷贝。");
             }
-
-
 
             // 获取 Service.dll 程序集服务，并注册
             var assemblysServices = Assembly.LoadFrom(servicesDllFile);
