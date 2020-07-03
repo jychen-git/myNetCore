@@ -181,3 +181,4 @@ F:\0_Study\1_Core\KAJ.Core\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Newt
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.csproj.CoreCompileInputs.cache
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cs
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cache
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Org\List.cshtml.g.cs

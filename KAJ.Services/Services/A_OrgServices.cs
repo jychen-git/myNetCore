@@ -1,7 +1,9 @@
 
 using System;
+using System.Data;
 using System.Threading.Tasks;
 using KAJ.Common;
+using KAJ.Common.Useful;
 using KAJ.IRepository;
 using KAJ.IServices;
 using KAJ.Model.Models;
@@ -20,7 +22,7 @@ namespace KAJ.Services
             this.dal = dal;
             base.BaseDal = dal;
         }
-       
+
     }
 }
 

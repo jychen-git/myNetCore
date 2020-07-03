@@ -186,22 +186,27 @@ namespace KAJ.Repository.Base
             return await _dbClient.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
         }
 
-        public async Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null)
+        public async Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression = null, string strWhere = null, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null)
         {
             RefAsync<int> totalCount = 0;
             var list = await _dbClient.Queryable<TEntity>()
              .OrderByIF(!string.IsNullOrEmpty(strOrderByFileds), strOrderByFileds)
              .WhereIF(whereExpression != null, whereExpression)
+             .WhereIF(!string.IsNullOrEmpty(strWhere), strWhere)
              .ToPageListAsync(intPageIndex, intPageSize, totalCount);
 
             int pageCount = (Math.Ceiling(totalCount.ObjToDecimal(0) / intPageSize.ObjToDecimal(0))).ObjToInt();
-            return new PageModel<TEntity>() { DataCount = totalCount, PageCount = pageCount, Page = intPageIndex, PageSize = intPageSize, Data = list };
+            return new PageModel<TEntity>() { count = totalCount, pageCount = pageCount, pageIndex = intPageIndex, pageSize = intPageSize, data = list };
+        }
+
+        public async Task<PageModel<TEntity>> GetPageData(KAJ.Common.Useful.QueryBuilder qb)
+        {
+            return await QueryPage(null, qb.GetWhereString(), qb.page, qb.limit);
         }
 
         public async Task<bool> Update(TEntity model)
         {
             return await _dbClient.Updateable(model).ExecuteCommandHasChangeAsync();
-
         }
 
         public async Task<bool> Update(TEntity entity, string strWhere)

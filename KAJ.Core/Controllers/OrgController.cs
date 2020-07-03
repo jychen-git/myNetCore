@@ -8,6 +8,8 @@ using System.Data;
 using System.Threading.Tasks;
 using KAJ.Common.Helper;
 using System.Linq;
+using System.Collections.Generic;
+using KAJ.Common.Useful;
 
 namespace KAJ.Core.Controllers
 {
@@ -26,10 +28,19 @@ namespace KAJ.Core.Controllers
 
         public IActionResult Index()
         {
-            var ss = Request;
+            _orgServices.GetListData();
             return View();
         }
 
+
+        public IActionResult addOrg()
+        {
+            return View();
+        }
+        public IActionResult List()
+        {
+            return View();
+        }
 
         public int Fun(int n)
         {
@@ -40,36 +51,28 @@ namespace KAJ.Core.Controllers
             else return Fun(n - 1) + Fun(n - 2);
         }
 
-        public IActionResult addOrg()
-        {
-            SQLHelper sQLHelper = SQLHelper.CreateSqlHelper();
-            string sql = "SELECT  * FROM A_Org";
-            sQLHelper.ExecuteDataTable(sql);
-            return View();
-        }
 
-        //public async Task<JsonResult> InsertOrgAsync()
-        //{
-        //    A_Org a_Org = new A_Org();
-        //    a_Org.ID = Guid.NewGuid().ToString();
-        //    a_Org.Code = "AAA";
-        //    a_Org.Name = "信息部";
-        //    await _orgServices.Add(a_Org);
-        //    return Json("");
-        //}
+
         [HttpPost]
         public async Task<JsonResult> InsertOrgAsync()
         {
-            var data = new MessageModel<string>();
+            var response = new Model.ResponseModel<A_Org>();
 
+            var data = Request.Form.Keys.FirstOrDefault();
             A_Org a_Org = new A_Org();
-            a_Org.ID = Guid.NewGuid().ToString();
-            a_Org.Code = "AAA";
-            a_Org.Name = "信息部";
-            await _orgServices.Add(a_Org);
-            System.Collections.Generic.List<A_Org> a_Org2 = await _orgServices.Query(f => f.ID == "");
-            a_Org2.FirstOrDefault();
-            return Json("");
+            a_Org = JsonHelper.ToObject<A_Org>(data);
+            a_Org.ID = GuidHelper.CreateGuid();
+            int i = await _orgServices.Add(a_Org);
+            response.success = true;
+            response.msg = "保存成功!";
+            response.data = a_Org;
+            return Json(response);
+        }
+
+        public async Task<JsonResult> GetListAsync(QueryBuilder qb)
+        {
+            var data = await _orgServices.GetPageData(qb);
+            return Json(data);
         }
     }
 }

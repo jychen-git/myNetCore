@@ -19,7 +19,7 @@ namespace KAJ.Common.Helper
         /// <param name="qb"></param>
         /// <param name="orderby"></param>
         /// <returns></returns>
-        public static MiniData ExecuteMiniData(this SQLHelper sqlHelper, string sql, QueryBuilder qb, string orderby)
+        public static MiniData ExecuteMiniData(this SQLHelper sqlHelper, string sql, QueryBuilder qb, string orderby = "ID")
         {
             DataTable dt = sqlHelper.ExecuteDataTable(sql, qb, orderby);
             MiniData gridData = new MiniData(dt);

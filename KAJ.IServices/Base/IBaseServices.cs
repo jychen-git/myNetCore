@@ -1,4 +1,5 @@
-﻿using KAJ.Model;
+﻿using KAJ.Common.Useful;
+using KAJ.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,12 @@ namespace KAJ.IServices.Base
         /// </summary>
         /// <returns></returns>
         DataTable GetListData();
+
+        /// <summary>
+        /// 返回分页数据
+        /// </summary>
+        /// <returns></returns>
+        Task<PageModel<TEntity>> GetPageData(QueryBuilder qb);
 
         Task<TEntity> QueryById(object objId);
         Task<TEntity> QueryById(object objId, bool blnUseCache = false);
@@ -51,7 +58,7 @@ namespace KAJ.IServices.Base
         Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFileds);
 
 
-        Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null);
+        Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression = null, string strWhere = null, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null);
 
         Task<List<TResult>> QueryMuch<T, T2, T3, TResult>(
             Expression<Func<T, T2, T3, object[]>> joinExpression,

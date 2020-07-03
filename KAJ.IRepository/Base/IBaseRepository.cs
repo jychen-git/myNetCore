@@ -1,5 +1,5 @@
-﻿using KAJ.Model;
-using SqlSugar;
+﻿using KAJ.Common.Useful;
+using KAJ.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,6 +21,12 @@ namespace KAJ.IRepository.Base
         /// </summary>
         /// <returns></returns>
         DataTable GetListData();
+
+        /// <summary>
+        /// 返回分页数据
+        /// </summary>
+        /// <returns></returns>
+        Task<PageModel<TEntity>> GetPageData(QueryBuilder qb);
 
         /// <summary>
         /// 根据主键查找实体
@@ -124,7 +130,7 @@ namespace KAJ.IRepository.Base
         Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFileds);
 
 
-        Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null);
+        Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression = null, string strWhere = null, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null);
 
         Task<List<TResult>> QueryMuch<T, T2, T3, TResult>(
             Expression<Func<T, T2, T3, object[]>> joinExpression,

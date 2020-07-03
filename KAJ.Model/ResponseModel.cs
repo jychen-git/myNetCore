@@ -7,8 +7,12 @@ namespace KAJ.Model
     /// <summary>
     /// 通用返回信息类
     /// </summary>
-    public class MessageModel<T>
+    public class ResponseModel<T>
     {
+        /// <summary>
+        /// Layui的成功码
+        /// </summary>
+        public int code { get; set; } = 0;
         /// <summary>
         /// 状态码
         /// </summary>
@@ -24,7 +28,11 @@ namespace KAJ.Model
         /// <summary>
         /// 返回数据集合
         /// </summary>
-        public T response { get; set; }
+        public T data { get; set; }
+        /// <summary>
+        /// 数据总数
+        /// </summary>
+        public int count { get; set; } = 0;
 
     }
 }

@@ -1093,7 +1093,7 @@ INSERT INTO [{2}]
 
         #endregion
 
-        #region [返回DataSet的SQL执行操作]
+        #region 返回DataSet的SQL执行操作
         /// <summary>
         /// 执行查询语句，返回DataSet
         /// </summary>

@@ -120,11 +120,14 @@ namespace KAJ.Services.Base
             return await BaseDal.QueryMuch(joinExpression, selectExpression, whereLambda);
         }
 
-        public async Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null)
+        public async Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression = null, string strWhere = null, int intPageIndex = 1, int intPageSize = 20, string strOrderByFileds = null)
         {
-            return await BaseDal.QueryPage(whereExpression, intPageIndex, intPageSize, strOrderByFileds);
+            return await BaseDal.QueryPage(whereExpression, strWhere, intPageIndex, intPageSize, strOrderByFileds);
         }
-
+        public async Task<PageModel<TEntity>> GetPageData(KAJ.Common.Useful.QueryBuilder qb)
+        {
+            return await QueryPage(null, qb.GetWhereString(), qb.page, qb.limit);
+        }
         public async Task<bool> Update(TEntity model)
         {
             return await BaseDal.Update(model);

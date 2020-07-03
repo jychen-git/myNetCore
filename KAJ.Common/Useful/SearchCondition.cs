@@ -61,21 +61,16 @@ namespace KAJ.Common.Useful
 
 
         /// <summary>
-        /// 请不要直接使用Items的Add方法，设计失误，应该为私有属性，但项目上已经使用，不修改
+        /// 条件项目
         /// </summary>
         public List<ConditionItem> Items { get; set; }
 
         /// <summary>
-        /// 查询条件间是否为Or关系
-        /// </summary>
-        public bool IsOrRelateion { get; set; }
-
-        /// <summary>
-        /// 获取where条件，如果没有条件则返回空字符串
+        /// 获取WHERE条件，如果没有条件则返回空字符串
         /// </summary>
         /// <param name="hasWhere"></param>
         /// <returns></returns>
-        public string GetWhereString(bool hasWhere = true)
+        public string GetWhereString(bool hasWhere = false)
         {
             try
             {
@@ -94,24 +89,24 @@ namespace KAJ.Common.Useful
                         if (String.IsNullOrEmpty(group))
                         {
                             var arr = _items.Where(c => String.IsNullOrEmpty(c.OrGroup)).ToList();
-                            str1 += string.Format(" and ({0})", GetGourpWhereString(arr));
+                            str1 += string.Format(" AND ({0})", GetGourpWhereString(arr));
                         }
                         else
                         {
                             var arr = _items.Where(c => c.OrGroup == group).ToList();
-                            str1 += string.Format(" and ({0})", GetGourpWhereString(arr, true));
+                            str1 += string.Format(" AND ({0})", GetGourpWhereString(arr, true));
                         }
                     }
 
-                    strWhere += string.Format("  or ({0})", str1.Substring(4));
+                    strWhere += string.Format("  OR ({0})", str1.Substring(4));
                 }
                 if (!string.IsNullOrWhiteSpace(this.whereSql))
-                    strWhere += string.Format("  or ({0})", this.whereSql);
+                    strWhere += string.Format("  OR ({0})", this.whereSql);
 
                 if (hasWhere)
-                    strWhere = " where " + strWhere.Substring(4);
+                    strWhere = " WHERE " + strWhere.Substring(4);
                 else
-                    strWhere = " and " + strWhere.Substring(4);
+                    strWhere = strWhere.Substring(4);
 
                 return strWhere;
             }
@@ -136,11 +131,11 @@ namespace KAJ.Common.Useful
 
                 if (isOrRelation)
                 {
-                    strWhere += " or  " + str;
+                    strWhere += " OR  " + str;
                 }
                 else
                 {
-                    strWhere += " and " + str;
+                    strWhere += " AND " + str;
                 }
             }
 
@@ -179,7 +174,7 @@ namespace KAJ.Common.Useful
                         str = string.Format("{0}>={1}", item.Field, value);
                         break;
                     case QueryMethod.Like:
-                        str = string.Format("{0} like '%{1}%'", item.Field, item.Value);
+                        str = string.Format("{0} LIKE '%{1}%'", item.Field, item.Value);
                         break;
                     case QueryMethod.NotIn:
                     case QueryMethod.In:
@@ -194,8 +189,8 @@ namespace KAJ.Common.Useful
                             if (item.Value.ToString().Contains("{0}")) //连续枚举的标签查询，如时间字段枚举的标签查询
                             {
                                 str = item.Value.ToString().Replace("'{0}'", item.Field).Replace("{0}", item.Field)
-                                    .Replace(",", " or ") //下拉框传递过来的in查询直是逗号隔开的
-                                    .Replace("==", "=").Replace("&&", "and").Replace("||", "or");
+                                    .Replace(",", " OR ") //下拉框传递过来的in查询直是逗号隔开的
+                                    .Replace("==", "=").Replace("&&", "AND").Replace("||", "OR");
                                 break;
                             }
                             else if (item.Value.ToString().StartsWith("(") && item.Value.ToString().EndsWith(")")) //支持子查询的in，例如在数据权限授权对象中写子查询
@@ -223,7 +218,7 @@ namespace KAJ.Common.Useful
                         }
                         foreach (string s in arr)
                         {
-                            str += string.Format("or {0} like '%{1}%'", item.Field, s);
+                            str += string.Format("OR {0} LIKE '%{1}%'", item.Field, s);
                         }
                         str = "(" + str.Substring(2) + ")";
                         break;
@@ -235,24 +230,24 @@ namespace KAJ.Common.Useful
                         }
                         string start = dt.Date.ToString("yyyy-MM-dd");
                         string end = dt.Date.AddDays(1).ToString("yyyy-MM-dd");
-                        str = string.Format("{0} between '{1}' and '{2}'", item.Field, start, end);
+                        str = string.Format("{0} BETWEEN '{1}' AND '{2}'", item.Field, start, end);
 
                         break;
                     case QueryMethod.NotEqual:
                         str = string.Format("{0}<>'{1}'", item.Field, item.Value);
                         break;
                     case QueryMethod.StartsWith:
-                        str = string.Format("{0} like '{1}%'", item.Field, item.Value);
+                        str = string.Format("{0} LIKE '{1}%'", item.Field, item.Value);
                         break;
                     case QueryMethod.EndsWith:
-                        str = string.Format("{0} like '%{1}'", item.Field, item.Value);
+                        str = string.Format("{0} LIKE '%{1}'", item.Field, item.Value);
                         break;
                     case QueryMethod.Between:
                         object[] objs = item.Value as object[];
-                        str = string.Format("{0} between '{1}' and '{2}'", item.Field, objs[0], objs[1]);
+                        str = string.Format("{0} BETWEEN '{1}' AND '{2}'", item.Field, objs[0], objs[1]);
                         break;
                     case QueryMethod.IsEmpty:
-                        str = string.Format("(len({0})=0 or len({0}) is null)", item.Field);
+                        str = string.Format("(LEN({0})=0 OR LEN({0}) is null)", item.Field);
                         break;
                 }
                 return str;

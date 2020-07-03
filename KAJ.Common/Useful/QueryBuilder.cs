@@ -11,6 +11,10 @@ namespace KAJ.Common.Useful
         /// </summary>
         public int PageIndex { get; set; }
 
+        public int page { get; set; }
+
+        public int limit { get; set; }
+
         /// <summary>
         /// 每页多少记录
         /// </summary>

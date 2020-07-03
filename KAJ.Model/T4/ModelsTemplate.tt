@@ -36,8 +36,9 @@ namespace KAJ.Model.Models
 	 ///<#=tableName#>
 	 ///</summary>
 	 [Table("<#=tableName#>")]	
-	 public class <#=tableName#>
+	 public class <#=tableName#>:BaseModel
 	 {
+	  public const string _thisTableName = "<#=tableName#>";
 	 <# foreach(DbColumn column in DbHelper.GetDbColumns(config.ConnectionString, config.DbDatabase, tableName)){#>
 
 		 /// <summary>
@@ -47,7 +48,9 @@ namespace KAJ.Model.Models
 		 if(column.IsPrimaryKey) 
 		 {#>[Key]
 		<#}#><# if(!column.IsNullable) {#>[Required]
-		<# }#>public <#= column.CSharpType#><# if(column.CommonType.IsValueType && column.IsNullable){#>?<#}#> <#=column.ColumnName#> { get; set; }
+		<# }#>public <#= column.CSharpType#><# if(column.CommonType.IsValueType && column.IsNullable){#>?<#}#> <#=column.ColumnName#> { get; set; } 
+		public const string _<#=column.ColumnName#> ="<#=column.ColumnName#>";
+		
 	<#
 	 }
 	 #> 

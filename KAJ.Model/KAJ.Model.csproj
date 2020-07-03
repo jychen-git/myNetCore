@@ -23,4 +23,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KAJ.Common\KAJ.Common.csproj" />
+  </ItemGroup>
+
 </Project>

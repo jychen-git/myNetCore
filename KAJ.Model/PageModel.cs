@@ -4,28 +4,39 @@ using System.Text;
 
 namespace KAJ.Model
 {
-   public class PageModel<T>
+    public class PageModel<T>
     {
+        /// <summary>
+        /// 状态码
+        /// </summary>
+        public int code { get; set; } = 0;
+
+        /// <summary>
+        /// 消息
+        /// </summary>
+        public string msg { get; set; }
         /// <summary>
         /// 当前页
         /// </summary>
-        public int Page { get; set; } = 1;
+        public int pageIndex { get; set; } = 1;
         /// <summary>
-        /// 总页数
+        /// 多少页
         /// </summary>
-        public int PageCount { get; set; } = 10;
+
+        public int pageCount { get; set; } = 1;
+        
         /// <summary>
         /// 每页大小
         /// </summary>
-        public int PageSize { set; get; }
+        public int pageSize { set; get; } = 20;
         /// <summary>
         /// 数据总数
         /// </summary>
-        public int DataCount { get; set; } = 0;
-        
+        public int count { get; set; } = 0;
+
         /// <summary>
         /// 返回数据
         /// </summary>
-        public List<T> Data { get; set; }
+        public List<T> data { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace KAJ.Core.Controllers
         {
             return View();
         }
-
+        
         public IActionResult LayuiDemo()
         {
             //TODO by cjy

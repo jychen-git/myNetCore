@@ -170,7 +170,11 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "F:\\0_Study\\1_Core\\KAJ.Common\\KAJ.Common.csproj": {
+                "projectPath": "F:\\0_Study\\1_Core\\KAJ.Common\\KAJ.Common.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

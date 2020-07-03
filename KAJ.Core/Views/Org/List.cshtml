@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+
+<table id="demo" lay-filter="test"></table>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , cellMinWidth: 80
+            , url: '/Org/GetList' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                { type: 'checkbox',  width: '5%' }
+                , { type: 'numbers', title: '序号', width: '5%' }
+                , { field: 'ID', title: 'ID', width: '20%' }
+                , { field: 'Code', title: '编号', width: '20%' }
+                , { field: 'Name', title: '名称', width: '30%' }
+                , { field: 'Remark', title: '备注', width: '20%' }
+            ]]
+        });
+
+    });
+</script>

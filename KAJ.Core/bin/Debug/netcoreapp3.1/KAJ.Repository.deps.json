@@ -1150,6 +1150,9 @@
         }
       },
       "KAJ.Model/1.0.0": {
+        "dependencies": {
+          "KAJ.Common": "1.0.0"
+        },
         "runtime": {
           "KAJ.Model.dll": {}
         }

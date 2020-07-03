@@ -3,17 +3,60 @@
     ViewData["Title"] = "addOrg";
 }
 
-<form class="layui-form">
+<form class="layui-form" action="" lay-filter="example">
     <div class="layui-form-item">
-        <label class="layui-form-label">组织编号</label>
+        <label class="layui-form-label">名称</label>
         <div class="layui-input-block">
-            <input type="text" name="Code" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            <input type="text" name="Name" lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">组织名称</label>
+        <label class="layui-form-label">编码</label>
+        <div class="layui-input-inline">
+            <input type="text" name="Code" lay-verify="required" placeholder="请输入编码" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="ID" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择框</label>
         <div class="layui-input-block">
-            <input type="text" name="Name" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            <select name="city" lay-verify="required">
+                <option value=""></option>
+                <option value="0">北京</option>
+                <option value="1">上海</option>
+                <option value="2">广州</option>
+                <option value="3">深圳</option>
+                <option value="4">杭州</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">复选框</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="like[write]" title="写作">
+            <input type="checkbox" name="like[read]" title="阅读" checked>
+            <input type="checkbox" name="like[dai]" title="发呆">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开关</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="switch" lay-skin="switch">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单选框</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男">
+            <input type="radio" name="sex" value="女" title="女" checked>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea name="Remark" placeholder="请输入内容" class="layui-textarea"></textarea>
         </div>
     </div>
 
@@ -34,28 +77,25 @@
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-            //layer.alert(JSON.stringify(data.field), {
-            //    title: '最终的提交信息'
-            //})
-            //return false;
-
             $.ajax({
-                url: 'InsertOrg',
-                method: 'post',
-                data: data.field,
-                dataType: 'JSON',
+                type: 'post',
+                url: '/Org/InsertOrg',
+                dataType: 'json',
+                data: JSON.stringify(data.field),//这是是要提交的参数
+                async: false,
                 success: function (res) {
-                    if (res.code = '0') {
-                        parent.closeIframe(res.msg);
+                    if (res.success) {
+                        form.val("example", res.data);
+                        layer.msg(JSON.stringify(res.data), { icon: 1, time: 1500 });
                     }
-                    else
-                        layer.alert(res.msg);
-                },
-                error: function (data) {
-
+                    else {
+                        layer.msg(res.msg, { icon: 2, time: 1500 });
+                    }
                 }
-            });
+            })
+            return false;
         });
+
     });
 
 </script>
