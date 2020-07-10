@@ -182,3 +182,6 @@ F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.csproj.CoreCompileIn
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cs
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\KAJ.Core.MvcApplicationPartsAssemblyInfo.cache
 F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Org\List.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\Home.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index - 副本.cshtml.g.cs
+F:\0_Study\1_Core\KAJ.Core\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index - 副本 (2).cshtml.g.cs

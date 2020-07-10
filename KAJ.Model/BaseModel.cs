@@ -8,6 +8,9 @@ using System.Text;
 
 namespace KAJ.Model
 {
+    /// <summary>
+    /// 基础对象扩展类
+    /// </summary>
     public abstract class BaseModel
     {
         public Dictionary<string, object> ToDic()

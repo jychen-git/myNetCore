@@ -69,9 +69,32 @@ namespace KAJ.Core.Controllers
             return Json(response);
         }
 
-        public async Task<JsonResult> GetListAsync(QueryBuilder qb)
+
+        //两种方式可以方便的取到数据。
+
+        /// <summary>
+        /// 1、用了框架，SqlSugar
+        /// </summary>
+        /// <param name="qb"></param>
+        /// <returns></returns>
+        public async Task<JsonResult> GetListNewAsync(QueryBuilder qb)
         {
             var data = await _orgServices.GetPageData(qb);
+            return Json(data);
+        }
+
+        /// <summary>
+        /// 2、直接ADO操作
+        /// </summary>
+        /// <param name="qb"></param>
+        /// <returns></returns>
+        public JsonResult GetList(QueryBuilder qb)
+        {
+            var sqlHelper = SQLHelper.CreateSqlHelper();
+            string sql = "SELECT  * FROM A_Org ";
+
+            //qb.SetSort(A_Org._Code + "," + A_Org._CreateTime, "DESC,DESC");
+            var data = sqlHelper.ExecuteLayData(sql, qb);
             return Json(data);
         }
     }

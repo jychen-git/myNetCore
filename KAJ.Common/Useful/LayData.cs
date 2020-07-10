@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
-namespace KAJ.Model
+namespace KAJ.Common.Useful
 {
     /// <summary>
-    /// LayUI返回分页数据，对象集合
+    /// 与Model.PageModel实现一样的功能
+    /// LayUI返回分页数据，DataTable格式的数据
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PageModel<T>
+    public class LayData
     {
+        public LayData(DataTable list, int total)
+        {
+            data = list;
+            count = total;
+        }
         /// <summary>
         /// 状态码
         /// </summary>
@@ -39,8 +46,8 @@ namespace KAJ.Model
         public int count { get; set; } = 0;
 
         /// <summary>
-        /// 返回数据List<T>
+        /// 返回数据DataTable
         /// </summary>
-        public List<T> data { get; set; }
+        public DataTable data { get; set; }
     }
 }

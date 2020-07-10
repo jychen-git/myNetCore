@@ -5,7 +5,7 @@ using System.Text;
 namespace KAJ.Model
 {
     /// <summary>
-    /// 通用返回信息类
+    /// 通用返回信息类,如请求返回一个对象
     /// </summary>
     public class ResponseModel<T>
     {
@@ -29,10 +29,5 @@ namespace KAJ.Model
         /// 返回数据集合
         /// </summary>
         public T data { get; set; }
-        /// <summary>
-        /// 数据总数
-        /// </summary>
-        public int count { get; set; } = 0;
-
     }
 }

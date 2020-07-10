@@ -7,30 +7,35 @@ namespace KAJ.Common.Useful
     public class QueryBuilder : SearchCondition
     {
         /// <summary>
-        /// 当前页面索引
+        /// 当前页面索引layui
         /// </summary>
-        public int PageIndex { get; set; }
-
         public int page { get; set; }
 
+        /// <summary>
+        /// 每页多少记录layui
+        /// </summary>
         public int limit { get; set; }
 
         /// <summary>
-        /// 每页多少记录
+        /// 当前页面索引miniui
+        /// </summary>
+        public int PageIndex { get; set; }
+
+        /// <summary>
+        /// 每页多少记录miniui
         /// </summary>
         public int PageSize { get; set; }
 
 
-        private string _sortField;
         /// <summary>
         /// 排序字段
         /// </summary>
-        public string SortField { get { return _sortField; } set { _sortField = value; DefaultSort = false; } }
+        public string SortField { get; set; } = "ID";
 
         /// <summary>
         /// 排序规则
         /// </summary>
-        public string SortOrder { get; set; }
+        public string SortOrder { get; set; } = "DESC";
 
         /// <summary>
         /// 总记录数

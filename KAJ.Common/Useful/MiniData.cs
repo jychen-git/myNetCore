@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace KAJ.Common.Useful
 {
+    /// <summary>
+    /// MiniUI的DataGrid
+    /// </summary>
     public class MiniData
     {
-        public MiniData(object list)
+        public MiniData(object list, int count)
         {
             data = list;
+            total = count;
             sumData = new Dictionary<string, object>();
             avgData = new Dictionary<string, object>();
         }

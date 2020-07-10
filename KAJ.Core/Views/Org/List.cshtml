@@ -2,12 +2,16 @@
 @{
     ViewData["Title"] = "List";
 }
-
+<div class="layui-btn-container">
+    <button type="button" class="layui-btn" onclick="add()">添加</button>
+    <button type="button" class="layui-btn" onclick="edit()">编辑</button>
+    <button type="button" class="layui-btn" onclick="del()">删除</button>
+</div>
 <table id="demo" lay-filter="test"></table>
 <script>
     layui.use('table', function () {
         var table = layui.table;
-
+        layer.load();
         //第一个实例
         table.render({
             elem: '#demo'
@@ -15,14 +19,29 @@
             , url: '/Org/GetList' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
-                { type: 'checkbox',  width: '5%' }
-                , { type: 'numbers', title: '序号', width: '5%' }
-                , { field: 'ID', title: 'ID', width: '20%' }
-                , { field: 'Code', title: '编号', width: '20%' }
-                , { field: 'Name', title: '名称', width: '30%' }
+                { type: 'checkbox', width: '5%' }
+                , { type: 'numbers', title: '序号', align: 'center', width: '5%' }
+                , { field: 'ID', title: 'ID', align: 'center',width: '20%' }
+                , { field: 'Code', title: '编号', align: 'left',width: '20%' }
+                , { field: 'Name', title: '名称', align: 'center',width: '20%' }
+                , { field: 'CreateTime', title: '创建时间', align: 'center',width: '10%' }
                 , { field: 'Remark', title: '备注', width: '20%' }
             ]]
         });
+        layer.closeAll('loading');
+
 
     });
+
+    //iframe层-父子操作
+    function add() {
+        layer.open({
+            type: 2,
+            area: ['700px', '450px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: '/Org/addOrg'
+        });
+    }
+
 </script>

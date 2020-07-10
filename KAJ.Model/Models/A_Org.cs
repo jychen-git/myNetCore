@@ -28,6 +28,27 @@ namespace KAJ.Model.Models
 		
 	
 		 /// <summary>
+        /// CreateTime
+        /// </summary>
+		public DateTime? CreateTime { get; set; } 
+		public const string _CreateTime ="CreateTime";
+		
+	
+		 /// <summary>
+        /// CreateUser
+        /// </summary>
+		public string CreateUser { get; set; } 
+		public const string _CreateUser ="CreateUser";
+		
+	
+		 /// <summary>
+        /// CreateUserName
+        /// </summary>
+		public string CreateUserName { get; set; } 
+		public const string _CreateUserName ="CreateUserName";
+		
+	
+		 /// <summary>
         /// Code
         /// </summary>
 		public string Code { get; set; } 
